@@ -58,3 +58,25 @@
     text-align: center;
 }
 /* End Modify & delete buttons */
+
+
+/* Search and Filter */
+.main .card.mb-3{
+    margin-top: 30px;
+}
+.main .card-body button{
+    margin-right: 3px
+}
+.main .card-body button:hover{
+    transform: scale(1.05);
+    background-color: transparent;  /* keep background transparent */
+    border-color: #198754;
+    color: #198754
+}
+.main .card-body button.active:hover{
+    transform: scale(1.05);
+    background-color: #198754;
+    border-color: #198754;
+    color: #fff;
+}
+/* End search and Filter */

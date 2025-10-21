@@ -3,6 +3,11 @@ extends ../../layouts/default.pug
 block main
     h1 Product Lists
 
+    .card.mb-3
+        .card-header Search and Filter
+        .card-body
+            each button in filterButtons
+                button(class=`btn btn-sm ml-1 btn-outline-success ${button.class}` stock=button.stock) #{button.buttonName}
     table.table.table-hover.table-sm
         thead
             tr
@@ -24,7 +29,7 @@ block main
                             height="auto"
                         )
                     td #{item.title}
-                    td #{item.price}
+                    td #{item.price.toFixed(0)}$
                     td
                         if item.stock > 0
                             a(href="#" class="badge bg-success") #{item.stock}
