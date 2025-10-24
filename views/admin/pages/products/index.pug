@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/filter-stock.pug
 include ../../mixins/search.pug
+include ../../mixins/pagination.pug
 block main
     h1 Product Lists
 
@@ -40,20 +41,8 @@ block main
                     td #{item.price.toFixed(0)}$
                     td #{item.discountPercentage.toFixed(0)}%
                     td
-                        if item.stock > 0
-                            a(href="#" class="badge bg-success") #{item.stock}
-                        else
-                            a(href="#" class="badge bg-danger") #{item.stock}
+                        a(href="#" class=` ${item.stock > 0 ? "badge bg-success" : "badge bg-danger"}`) #{item.stock}
                     td
                         button(class="btn btn-warning btn-sm") Modify
                         button(class="btn btn-danger btn-sm ml-1") Delete
-    nav
-        ul(class="pagination")
-            li(class="page-item")
-                button(class="page-link" pageNumber=pagination.currentPage > 1 ? pagination.currentPage - 1: 1) Previous
-            - for(let i = 0; i < pagination.total_pages; i ++){
-                li(class="page-item")
-                    button(class=`page-link ${i + 1 == pagination.currentPage ? "active" : ""}` pageNumber=i + 1) #{i + 1}
-            - }
-            li(class="page-item")
-                button(class="page-link" pageNumber=pagination.currentPage < pagination.total_pages ? pagination.currentPage + 1: pagination.total_pages) Next
+    +pagination(pagination)
