@@ -13,9 +13,23 @@ block main
                     +filter-buttons(filterButtons)
                 .col-6
                     +search(last_search_word)
+    form(action="/admin/product/change-multi?_method=PATCH" method="POST" form-change-multi)
+        //- data submitted to back end will be in the form {type: "delete" || "change-position" , ids: "...."}
+        .d-flex.align-items-start.justify-content-start
+            .form-group
+                select(name="type" class="form-control")
+                    option(value="" disabled selected) --Choose your action--
+                    option(value="delete") Delete
+                    option(value="change-position") Change Position
+            //- imaginary form (just to send data to back end)
+            .form-.d-none
+                input(name="ids" value="" type="text" class="form-control")
+            button(type="submit" class="btn btn-primary") Apply
     table.table.table-hover.table-sm
         thead
             tr
+                th
+                    input(type="checkbox" name="check-all")
                 th N.o
                 th Image
                 th Title
@@ -27,6 +41,8 @@ block main
         tbody
             each item, index in products
                 tr
+                    td
+                        input(type="checkbox" name="id" value=item.id)
                     td #{index + 1 + (pagination.currentPage - 1) * pagination.limitItems}
                     //- calculate accurate index at each page
                     td
@@ -51,4 +67,4 @@ block main
 
     //- script.js is used to handle general interaction (pagination, searching,...), product.js is used to process specific details about products (edit, delete)
     form(id="change-stock" action="" method="POST" path="/admin/product/change-stock")
-    script(src="/admin/js/product.js")
+    //- script(src="/admin/js/product.js")

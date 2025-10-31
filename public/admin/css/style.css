@@ -88,3 +88,9 @@
 /* Pagination */
 
 /* End Pagination */
+
+/* Change Multi */
+form[form-change-multi]{
+    margin: 70px 0
+}
+/* End change multi */

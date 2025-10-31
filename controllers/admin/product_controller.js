@@ -39,7 +39,7 @@ module.exports.index = async (req, res) => {
 }
 
 // [PATCH] /admin/product/change-stock/:current_stock/:counter_value/:id
-module.exports.change_stock = async (req, res) => {
+module.exports.changeStock = async (req, res) => {
     const counter_value = req.params.counter_value
     const product_id = req.params.id
 
@@ -55,4 +55,18 @@ module.exports.change_stock = async (req, res) => {
         await target_product.updateOne({stock: current_stock + 1})
     }
     res.redirect(req.get('referer') || '/admin/product') // referer is the contains the address from which a resource has been requested
+}
+// [PATCH] /admin/product/change-multi
+module.exports.changeMulti = (req, res) => {
+    // back end receives data from form submission in req.body
+    const actionType = req.body.type
+    const ids = req.body.ids.split(",")
+    switch(actionType){
+        case "delete":
+            ids.forEach(async (id) => {
+                await Product.updateOne({_id: id}, {deleted: true})
+            });
+    }
+    res.redirect(req.get('referer') || '/admin/product')
+
 }

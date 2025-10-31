@@ -4,10 +4,11 @@ module.exports = (req) => {
         {
             buttonName: "All",
             stock: "",
-            class: req.query.stock === undefined ? "active" : ""
+            class: (req.query.stock === undefined && req.query.search_key_word) === undefined ? "active" : ""
+            // if there is search_key_word param -> the all button is inactive
         },
         {
-            buttonName: "In stock",
+            buttonName: "In stock", 
             stock: "instock",
             class: req.query.stock === "instock" ? "active" : ""
         },

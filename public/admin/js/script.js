@@ -52,3 +52,70 @@ if(pages){
     })
 }
 // End Pagination
+
+// Increment/Decrement Stock Value
+const counterButtons = document.querySelectorAll(".stock-counter")
+if(counterButtons.length > 0){
+    // let url_params = new URLSearchParams(new URL(window.location.href).search).toString()
+    counterButtons.forEach(button => {
+        const changeStockForm = document.querySelector("#change-stock")
+        const path = changeStockForm.getAttribute("path")
+        button.addEventListener("click", () => {
+            // const current_stock = button.getAttribute("current_stock")
+            const counter_value = button.getAttribute("counter_value")
+            const data_id = button.getAttribute("data-id")
+
+            changeStockForm.setAttribute("action", `${path}/${counter_value}/${data_id}?_method=PATCH`)
+            changeStockForm.submit()
+        })
+    })
+}
+// End increment/Decrement Stock Value
+
+// Multiple Selection Tick Boxes
+
+const check_all_box = document.querySelector("input[name=check-all]")
+const product_boxes = document.querySelectorAll("input[name=id]")
+check_all_box.addEventListener("click", () => {
+    if(check_all_box.checked === true){
+        product_boxes.forEach(box => box.checked = true)
+    }
+    else{
+        product_boxes.forEach(box => box.checked = false)
+    }
+})
+product_boxes.forEach(box => {
+    box.addEventListener("click", () => {
+        const check_count = document.querySelectorAll("input[name=id]:checked").length
+        if(check_count === product_boxes.length){
+            check_all_box.checked = true
+        }
+        else{
+            check_all_box.checked = false
+        }
+    })
+})
+
+// End multiple selection tick boxes
+
+// Form change-multi
+const formMulti = document.querySelector("form[form-change-multi")
+if(formMulti){
+    // Retreive the ids of all checked boxes in an array
+    const idsInput = document.querySelector("input[name=ids]") // an imaginary input form to store the ids of selected products
+    const selectChoice = document.querySelector("select[name=type]")
+    formMulti.addEventListener("submit", (e) => {
+        const checked_items = document.querySelectorAll("input[name=id]:checked")
+        idsInput.value = Array.from(checked_items).map(item => item.value).toString()
+        try{
+            if(!selectChoice.value){
+                e.preventDefault()
+                throw new Error("Please select an option")
+            }
+        }
+        catch(error){
+            alert(error.message)
+        }
+    })
+}
+// End form change-multi
