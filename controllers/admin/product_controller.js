@@ -60,7 +60,7 @@ module.exports.changeStock = async (req, res) => {
 module.exports.changeMulti = (req, res) => {
     // back end receives data from form submission in req.body
     const actionType = req.body.type
-    const ids = req.body.ids.split(",")
+    const ids = req.body.ids.split(",") // convert the string of ids on the url
     switch(actionType){
         case "delete":
             ids.forEach(async (id) => {
@@ -69,4 +69,11 @@ module.exports.changeMulti = (req, res) => {
     }
     res.redirect(req.get('referer') || '/admin/product')
 
+}
+
+// [DELETE] /admin/product/delete/:id
+module.exports.delete = async (req, res) => {
+    const product_id = req.params.id
+    await Product.updateOne({"_id": product_id}, {"deleted": true})
+    res.redirect(req.get('referer') || '/admin/product')
 }

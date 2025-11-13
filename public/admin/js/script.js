@@ -58,7 +58,7 @@ const counterButtons = document.querySelectorAll(".stock-counter")
 if(counterButtons.length > 0){
     // let url_params = new URLSearchParams(new URL(window.location.href).search).toString()
     counterButtons.forEach(button => {
-        const changeStockForm = document.querySelector("#change-stock")
+        const changeStockForm = document.querySelector("form#change-stock")
         const path = changeStockForm.getAttribute("path")
         button.addEventListener("click", () => {
             // const current_stock = button.getAttribute("current_stock")
@@ -109,8 +109,11 @@ if(formMulti){
         idsInput.value = Array.from(checked_items).map(item => item.value).toString()
         try{
             if(!selectChoice.value){
-                e.preventDefault()
+                e.preventDefault() // stop submitting
                 throw new Error("Please select an option")
+            }
+            if(!confirm("Are you sure for your action?")){
+                e.preventDefault()
             }
         }
         catch(error){
@@ -119,3 +122,21 @@ if(formMulti){
     })
 }
 // End form change-multi
+
+// Delete product
+const deleteButtons = document.querySelectorAll("button.delete")
+
+if(deleteButtons){
+    deleteButtons.forEach((button) => {
+        const deleteForm = document.querySelector("form#delete-product")
+        button.addEventListener("click", () => {
+            if(confirm("Are you sure to delete?")){
+                const product_id = button.getAttribute("data-id")
+                deleteForm.setAttribute("action", deleteForm.getAttribute("path") + `/${product_id}?_method=DELETE`)
+                deleteForm.submit()
+            }
+        })
+    })
+}
+// End delete product
+
