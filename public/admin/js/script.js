@@ -108,10 +108,17 @@ if(formMulti){
         const checked_items = document.querySelectorAll("input[name=id]:checked")
         idsInput.value = Array.from(checked_items).map(item => item.value).toString()
         try{
+            // If there is no action selected
             if(!selectChoice.value){
                 e.preventDefault() // stop submitting
                 throw new Error("Please select an option")
             }
+            // If there is no product selected
+            if(checked_items.length === 0){
+                e.preventDefault()
+                throw new Error("Please select at least one product")
+            }
+            // Confirm if user want to continue the action (enhance UX, e.g., user misclick to choose delete multi items)
             if(!confirm("Are you sure for your action?")){
                 e.preventDefault()
             }

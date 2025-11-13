@@ -57,15 +57,19 @@ module.exports.changeStock = async (req, res) => {
     res.redirect(req.get('referer') || '/admin/product') // referer is the contains the address from which a resource has been requested
 }
 // [PATCH] /admin/product/change-multi
-module.exports.changeMulti = (req, res) => {
+module.exports.changeMulti = async (req, res) => {
     // back end receives data from form submission in req.body
     const actionType = req.body.type
     const ids = req.body.ids.split(",") // convert the string of ids on the url
     switch(actionType){
         case "delete":
-            ids.forEach(async (id) => {
-                await Product.updateOne({_id: id}, {deleted: true})
-            });
+            // ids.forEach(async (id) => {
+            //     await Product.updateOne({_id: id}, {deleted: true})
+            // })
+            await Product.updateMany({_id: {$in: ids}}, {$set: {deleted: true}})
+            break
+        default:
+            break
     }
     res.redirect(req.get('referer') || '/admin/product')
 
