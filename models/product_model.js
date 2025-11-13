@@ -7,7 +7,8 @@ const productSchema = new Schema({
     stock: Number,
     images: String,
     deleted: Boolean,
-    category: String
+    category: String,
+    deleteTime: Date
 })
 // define product model
 const Product = mongoose.model("products", productSchema, "products")
