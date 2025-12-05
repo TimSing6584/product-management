@@ -3,8 +3,11 @@ include ../../mixins/filter-stock.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
+include ../../mixins/alert.pug
 block main
     h1 Product Lists
+
+    +alert("5000")
 
     .card.mb-3
         .card-header Search and Filter

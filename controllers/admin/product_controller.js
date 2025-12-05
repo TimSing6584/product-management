@@ -28,7 +28,10 @@ module.exports.index = async (req, res) => {
     const total_products = await Product.countDocuments(filter)
     let pagination = paginationHelper(req, 4, total_products) // limit item per page is 4
 
-    const filterProducts = await Product.find(filter).limit(pagination.limitItems).skip((pagination.currentPage - 1) * pagination.limitItems)
+    const filterProducts = await Product.find(filter)
+                                        .limit(pagination.limitItems)
+                                        .skip((pagination.currentPage - 1) * pagination.limitItems)
+                                        .sort({position: 1})
     res.render("admin/pages/products/index.pug", {
         titlePage: "Admin Product Page",
         products: filterProducts,
@@ -54,6 +57,7 @@ module.exports.changeStock = async (req, res) => {
     else{
         await target_product.updateOne({stock: current_stock + 1})
     }
+    req.flash("success", "You have successfully changed stock number")
     res.redirect(req.get('referer') || '/admin/product') // referer is the contains the address from which a resource has been requested
 }
 // [PATCH] /admin/product/change-multi
@@ -64,6 +68,7 @@ module.exports.changeMulti = async (req, res) => {
     switch(actionType){
         case "delete":
             await Product.updateMany({_id: {$in: ids}}, {$set: {deleted: true, deleteTime: new Date()}})
+            req.flash("success", "You have successfully deleted products")
             break
         case "change-position":
             for(let id_pos of ids){
@@ -71,7 +76,7 @@ module.exports.changeMulti = async (req, res) => {
                 //  because 'change-position' is a special case where ids has the form [id-pos]
                 await Product.updateOne({_id: id}, { $set: { position: parseInt(position)}})
             }
-
+            req.flash("success", "You have successfully changed products' position")
             break
         default:
             break
@@ -84,5 +89,6 @@ module.exports.changeMulti = async (req, res) => {
 module.exports.delete = async (req, res) => {
     const product_id = req.params.id
     await Product.updateOne({"_id": product_id}, {"deleted": true, "deleteTime": new Date()})
+    req.flash("success", "You have successfully deleted product")
     res.redirect(req.get('referer') || '/admin/product')
 }
