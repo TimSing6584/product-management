@@ -61,16 +61,17 @@ module.exports.changeMulti = async (req, res) => {
     // back end receives data from form submission in req.body
     const actionType = req.body.type
     const ids = req.body.ids.split(",") // convert the string of ids on the url
-    const positions = Array.from(req.body.positions.split(",")).map(pos => parseInt(pos)) // convert the string of postions to an array of int
     switch(actionType){
         case "delete":
             await Product.updateMany({_id: {$in: ids}}, {$set: {deleted: true, deleteTime: new Date()}})
             break
         case "change-position":
-            console.log(positions)
-            for(let i = 0; i < ids.length; i++){
-                await Product.updateOne({_id: ids[i]}, { $set: { position: positions[i]}})
+            for(let id_pos of ids){
+                let [id, position] = id_pos.split("-")
+                //  because 'change-position' is a special case where ids has the form [id-pos]
+                await Product.updateOne({_id: id}, { $set: { position: parseInt(position)}})
             }
+
             break
         default:
             break

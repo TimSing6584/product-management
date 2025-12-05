@@ -103,18 +103,19 @@ const formMulti = document.querySelector("form[form-change-multi")
 if(formMulti){
     // Retreive the ids of all checked boxes in an array
     const idsInput = document.querySelector("input[name=ids]") // an imaginary input form to store the ids of selected products
-    const positionsInput = document.querySelector("input[name=positions]") // an imaginary input form to store the positions of selected products
     const selectChoice = document.querySelector("select[name=type]")
     formMulti.addEventListener("submit", (e) => {
         const checked_items = document.querySelectorAll("input[name=id]:checked")
-        // only retreive the postions of products that are clicked/checked
-        // const new_positions = document.querySelectorAll("input[name=position]")
-        const new_positions = Array.from(checked_items).map(checkbox => {
-            return checkbox.closest("tr")
-                            .querySelector('input[name="position"]').value;
-        })
-        idsInput.value = Array.from(checked_items).map(item => item.value).toString()
-        positionsInput.value = new_positions
+        if(selectChoice.value == "change-position"){
+            // if choose "change-position": store array ids in the form "id-position"
+            idsInput.value = Array.from(checked_items).map(checkbox => {
+                return checkbox.value + "-" + checkbox.closest("tr").querySelector('input[name="position"]').value
+            })
+        }
+        else{
+            // any choices except "change-position": store array ids in the form "id" only
+            idsInput.value = Array.from(checked_items).map(item => item.value).toString()
+        }
 
         try{
             // If there is no action selected

@@ -6,7 +6,7 @@ module.exports.index = async (req, res) => {
         deleted: false,
         stock: { $gt: 0 },
 
-    }).sort({position: 1})
+    }).sort({position: 1}) // sort the product by position to display
     console.log(render_product)
     res.render("client/pages/products/index.pug", {
         titlePage: "Product Page",
