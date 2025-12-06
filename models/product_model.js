@@ -11,6 +11,8 @@ const productSchema = new Schema({
     deleteTime: Date,
     position: Number,
     description: String
+}, {
+    timestamps: true // This enables automatic timestamps
 })
 // define product model
 const Product = mongoose.model("products", productSchema, "products")

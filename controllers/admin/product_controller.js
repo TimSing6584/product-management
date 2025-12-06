@@ -103,18 +103,22 @@ module.exports.create_get = (req, res) => {
 // [POST] /admin/product/create
 module.exports.create_post = async (req, res) => {
     const newProduct = req.body
+    if(newProduct.position == ""){
+        const countProducts = await Product.countDocuments()
+        newProduct.position = countProducts + 1
+    }
     await Product.create({
         title: newProduct.title,
-        price: newProduct.price,
-        discountPercentage: newProduct.discountPercentage,
-        stock: newProduct.stock,
+        price: parseInt(newProduct.price),
+        discountPercentage:parseInt(newProduct.discountPercentage),
+        stock: parseInt(newProduct.stock),
         images: newProduct.images,
         deleted: false,
         category: newProduct.category,
         // deleteTime: Date,
-        position: newProduct.position,
+        position: parseInt(newProduct.position),
         description: newProduct.description
     })
-
+    req.flash("success", "You have successfully created new product")
     res.redirect('/admin/product')
 }
