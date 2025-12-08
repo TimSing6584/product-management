@@ -2,17 +2,18 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
     +alert-error("5000")
-    form#create-form.product-form(
-        action="/admin/product/create"
+    form#edit-form.product-form(
+        action=`/admin/product/edit/${product.id}?_method=PATCH`
         enctype="multipart/form-data"
         method="POST"
     )
-        h2 Create New Product
+        h2 Edit Product
 
         .row.g-3
             .col-md-6
                 label(for="title") Title
                 input(
+                    value=product.title
                     type="text"
                     id="title"
                     name="title"
@@ -23,6 +24,7 @@ block main
             .col-md-6
                 label(for="price") Price ($)
                 input(
+                    value=product.price
                     type="number"
                     id="price"
                     name="price"
@@ -35,6 +37,7 @@ block main
             .col-md-6
                 label(for="discountPercentage") Discount (%)
                 input(
+                    value=product.discountPercentage
                     type="number"
                     id="discountPercentage"
                     name="discountPercentage"
@@ -45,6 +48,7 @@ block main
             .col-md-6
                 label(for="stock") Stock
                 input(
+                    value=product.stock
                     type="number"
                     id="stock"
                     name="stock"
@@ -56,20 +60,24 @@ block main
             .col-12
                 label(for="images") Image
                 input(
+
                     type="file"
                     class="form-control-file"
-                    id="images" name="images"
+                    id="images"
+                    name="images"
                     accept="image/*"
                     upload-image-input
                 )
-                img(src="" upload-image-preview)
+                if product.images
+                    img(src=product.images upload-image-preview)
             .col-md-6
                 label(for="category") Category
-                input(type="text" id="category" name="category")
+                input(value=product.category type="text" id="category" name="category")
 
             .col-md-6
                 label(for="position") Display Position
                 input(
+                    value=product.position
                     type="number"
                     id="position"
                     name="position"
@@ -83,8 +91,8 @@ block main
                     name="description"
                     rows="4"
                     placeholder="Enter product description..."
-                )
+                )= product.description
 
         .mt-4.text-end
             a.btn-reset.text-decoration-none(href="/admin/product") Cancel
-            button.btn-submit(type="submit") Create Product
+            button.btn-submit(type="submit") Update

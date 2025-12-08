@@ -114,3 +114,27 @@ module.exports.create_post = async (req, res) => {
     req.flash("success", "You have successfully created new product")
     res.redirect('/admin/product')
 }
+
+// [GET] /admin/product/edit/:id
+module.exports.edit_get = async (req, res) => {
+    const product_id = req.params.id
+    const product = await Product.findById(product_id)
+    res.render("admin/pages/products/edit.pug", {
+        titlePage: "Edit Product",
+        product: product
+    })
+}
+
+// [PATCH] /admin/product/edit/:id
+module.exports.edit_patch = async (req, res) => {
+    const id = req.params.id;
+    const data = req.body; // title, price, stock, etc.
+
+    if (req.file) {
+        data.images = `/uploads/${req.file.filename}`
+    }
+
+    await Product.updateOne({ _id: id }, data);
+    req.flash("success", `You have modified ${data.title}`)
+    res.redirect("/admin/product")
+}

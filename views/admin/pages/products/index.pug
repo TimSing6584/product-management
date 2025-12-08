@@ -70,7 +70,10 @@ block main
                         div(class=` ${item.stock > 0 ? "badge bg-success" : "badge bg-danger"}`) #{item.stock}
                         button(class="btn bg-transparent stock-counter" counter_value="increment" data-id=item.id) +
                     td
-                        button(class="btn btn-warning btn-sm modify" data-id=item.id) Modify
+                        a(
+                            class="btn btn-warning btn-sm modify"
+                            href=`/admin/product/edit/${item.id}`
+                        ) Modify
                         button(class="btn btn-danger btn-sm ml-1 delete" data-id=item.id) Delete
     +pagination(pagination)
 

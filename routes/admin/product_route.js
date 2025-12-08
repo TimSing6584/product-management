@@ -17,4 +17,12 @@ router.post(
     create_product_validator.create_product,
     controller.create_post
 )
+router.get("/edit/:id", controller.edit_get)
+// can re-use the validator when create product
+router.patch(
+    "/edit/:id",
+    upload.single("images"),
+    create_product_validator.create_product,
+    controller.edit_patch
+)
 module.exports = router
