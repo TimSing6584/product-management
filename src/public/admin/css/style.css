@@ -296,7 +296,6 @@ img[upload-image-preview]:not([src=""]) {
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/* 2 columns layout */
 .product-grid {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -310,8 +309,6 @@ img[upload-image-preview]:not([src=""]) {
     object-fit: cover;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
-
-/* Right panel */
 .product-info {
     padding-top: 10px;
 }
@@ -346,8 +343,4 @@ img[upload-image-preview]:not([src=""]) {
     margin-top: 4px;
     white-space: pre-line;
 }
-
-
-
-
 /* End detail product */

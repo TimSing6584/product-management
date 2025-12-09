@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/box_head.pug
+//- include alert later
 block main
     .container.my-3
         .row
@@ -12,7 +13,8 @@ block main
                         .inner-image
                             img(src=item.images alt=item.title)
                         .inner-content
-                            h3.inner-title #{item.title}
+                            h3.inner-title
+                                a(href=`/product/detail/${item.slug}`) #{item.title}
                             .inner-price-new #{(((100 - item.discountPercentage) * item.price) / 100).toFixed(0)}$
                             //- Render discount if exist only
                             if item.discountPercentage != 0

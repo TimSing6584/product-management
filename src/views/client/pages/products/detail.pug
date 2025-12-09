@@ -1,7 +1,6 @@
 extends ../../layouts/default.pug
 block main
-    h2 Product Details
-        .product-detail
+    .product-detail
         .product-grid
             .product-image
                 if product.images
@@ -15,10 +14,10 @@ block main
                 .info-item
                     strong Price:
                     span $#{product.price}
-
-                .info-item
-                    strong Discount:
-                    span #{product.discountPercentage}%
+                if product.discountPercentage > 0
+                    .info-item
+                        strong Discount:
+                        span #{product.discountPercentage}%
 
                 .info-item
                     strong Stock:
@@ -34,6 +33,4 @@ block main
 
 
     .mt-4.text-end
-        a.btn.btn-secondary(href=`/admin/product?page=${currentPage}`) Back
-        a.btn.btn-primary(href=`/admin/product/edit/${product.id}`) Modify
-
+        a.btn.btn-secondary(href=`/product` back-button) Back
