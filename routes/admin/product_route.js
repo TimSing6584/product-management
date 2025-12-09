@@ -25,4 +25,5 @@ router.patch(
     create_product_validator.create_product,
     controller.edit_patch
 )
+router.get("/detail/:id", controller.detail)
 module.exports = router

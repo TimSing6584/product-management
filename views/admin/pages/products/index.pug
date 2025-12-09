@@ -71,6 +71,10 @@ block main
                         button(class="btn bg-transparent stock-counter" counter_value="increment" data-id=item.id) +
                     td
                         a(
+                            class="btn btn-sm btn-secondary"
+                            href=`/admin/product/detail/${item.id}?page=${pagination.currentPage}`
+                        ) Detail
+                        a(
                             class="btn btn-warning btn-sm modify"
                             href=`/admin/product/edit/${item.id}?page=${pagination.currentPage}`
                         ) Modify

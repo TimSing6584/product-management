@@ -1,0 +1,39 @@
+extends ../../layouts/default.pug
+block main
+    h2 Product Details
+        .product-detail
+        .product-grid
+            .product-image
+                if product.images
+                    img(src=product.images, alt=product.title)
+
+            .product-info
+                .info-item
+                    strong Title:
+                    span= product.title
+
+                .info-item
+                    strong Price:
+                    span $#{product.price}
+
+                .info-item
+                    strong Discount:
+                    span #{product.discountPercentage}%
+
+                .info-item
+                    strong Stock:
+                    span #{product.stock}
+
+                .info-item
+                    strong Position:
+                    span #{product.position}
+
+        .description-section
+            strong Description:
+            p.description-text= product.description
+
+
+    .mt-4.text-end
+        a.btn.btn-secondary(href=`/admin/product?page=${currentPage}`) Back
+        a.btn.btn-primary(href=`/admin/product/edit/${product.id}`) Modify
+

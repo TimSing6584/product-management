@@ -154,3 +154,21 @@ module.exports.edit_patch = async (req, res) => {
         res.redirect(`/admin/product?page=${currentPage}`)
     }
 }
+
+// [GET] /admin/product/detail/:id
+module.exports.detail = async (req, res) => {
+    const currentPage = req.query.page
+    try{
+        const product_id = req.params.id
+        const product = await Product.findById(product_id)
+        res.render("admin/pages/products/detail.pug", {
+            titlePage: product.title,
+            product: product,
+            currentPage: currentPage
+        })
+    }
+    catch(error){
+        req.flash("error", "Can't access")
+        res.redirect(`/admin/product?page=${currentPage}`)
+    }
+}
