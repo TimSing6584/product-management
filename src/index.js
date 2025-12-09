@@ -20,9 +20,9 @@ const port = process.env.PORT
 // import database
 const database = require("./config/database.js")
 // embed static files
-app.use(express.static('public'))
+app.use(express.static(`${__dirname}/public`))
 // set up the template engine
-app.set("views", "./views")
+app.set("views", `${__dirname}/views`)
 app.set("view engine", "pug")
 
 // set up flash():
