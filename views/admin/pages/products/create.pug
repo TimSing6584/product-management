@@ -3,7 +3,7 @@ include ../../mixins/alert.pug
 block main
     +alert-error("5000")
     form#create-form.product-form(
-        action="/admin/product/create"
+        action=`/admin/product/create`
         enctype="multipart/form-data"
         method="POST"
     )
@@ -86,5 +86,7 @@ block main
                 )
 
         .mt-4.text-end
-            a.btn-reset.text-decoration-none(href="/admin/product") Cancel
+            a.btn-reset.text-decoration-none(
+                href=`/admin/product?page=${currentPage}`
+            ) Cancel
             button.btn-submit(type="submit") Create Product

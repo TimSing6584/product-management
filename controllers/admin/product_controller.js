@@ -2,6 +2,7 @@ const Product = require("../../models/product_model.js")
 const filterStockHelper = require("../../helpers/filter_stock.js")
 const searchHelper = require("../../helpers/search.js")
 const paginationHelper = require("../../helpers/pagination.js")
+const { ITEMS_PER_PAGE } = require("../../config/pagination.js")
 // [GET] /admin/product
 module.exports.index = async (req, res) => {
     let filter = {
@@ -26,7 +27,7 @@ module.exports.index = async (req, res) => {
 
     // Pagination
     const total_products = await Product.countDocuments(filter)
-    let pagination = paginationHelper(req, 4, total_products) // limit item per page is 4
+    let pagination = paginationHelper(req, ITEMS_PER_PAGE, total_products) // limit item per page is 4
 
     const filterProducts = await Product.find(filter)
                                         .limit(pagination.limitItems)
@@ -95,24 +96,26 @@ module.exports.delete = async (req, res) => {
 
 // [GET] /admin/product/create
 module.exports.create_get = (req, res) => {
+    const currentPage = parseInt(req.query.page)
     res.render("admin/pages/products/create.pug", {
-        titlePage: "Create New Product"
+        titlePage: "Create New Product",
+        currentPage: currentPage
     })
 }
 
 // [POST] /admin/product/create
 module.exports.create_post = async (req, res) => {
     const newProduct = req.body
+    // Determine the page to render back after creating
+    const totalDocuments = await Product.countDocuments()
+    const renderPage = Math.ceil((totalDocuments + 1) / ITEMS_PER_PAGE)
+
     if(newProduct.position == ""){
-        const countProducts = await Product.countDocuments()
-        newProduct.position = countProducts + 1
-    }
-    if(req.file){
-        newProduct.images = `/uploads/${req.file.filename}`
+        newProduct.position = totalDocuments + 1
     }
     await Product.create(newProduct)
     req.flash("success", "You have successfully created new product")
-    res.redirect('/admin/product')
+    res.redirect(`/admin/product?page=${renderPage}`)
 }
 
 // [GET] /admin/product/edit/:id
@@ -139,10 +142,6 @@ module.exports.edit_patch = async (req, res) => {
     try{
         const id = req.params.id;
         const data = req.body; // title, price, stock, etc.
-
-        if (req.file) {
-            data.images = `/uploads/${req.file.filename}`
-        }
 
         await Product.updateOne({ _id: id }, data);
         req.flash("success", `You have modified ${data.title}`)

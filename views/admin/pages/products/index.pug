@@ -21,7 +21,9 @@ block main
         .col-9
             +form_change_multi("/admin/product/change-multi?_method=PATCH")
         .col-3.d-flex.justify-content-end
-            a.btn.btn-outline-success(href="/admin/product/create") + Create Product
+            a.btn.btn-outline-success(
+                href=`/admin/product/create?page=${pagination.currentPage}`
+            ) + Create Product
 
     table.table.table-hover.table-sm
         thead
