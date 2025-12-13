@@ -67,7 +67,11 @@ block main
                 img(src="" upload-image-preview)
             .col-md-6
                 label(for="category") Category
-                input(type="text" id="category" name="category")
+                select(id="category" name="category" required)
+                    option(value="" disabled selected) -- Select category --
+                    each category in categories
+                        option(value=category._id)= category.name
+
 
             .col-md-6
                 label(for="position") Display Position

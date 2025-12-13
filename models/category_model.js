@@ -2,33 +2,28 @@ const mongoose = require("mongoose")
 const slug = require('mongoose-slug-updater')
 mongoose.plugin(slug)
 const { Schema } = mongoose;
-const productSchema = new Schema({
-    title: String,
-    price: Number,
-    discountPercentage: Number,
-    stock: Number,
-    images: String,
+const categorySchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true
+    },
     deleted: {
         type: Boolean,
         default: false
     },
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: "categories" // model names
-    },
     deleteTime: Date,
-    position: Number,
-    description: String,
     slug: {
         type: String,
-        slug: "title", // slug will be set same as title of product
+        slug: "name", // slug will be set same as title of product
         unique: true // guarantee the slug is unique
     }
 }, {
     timestamps: true // This enables automatic timestamps
 })
 // define product model
-const Product = mongoose.model("products", productSchema, "products")
+const Category = mongoose.model("categories", categorySchema, "categories")
 // third argument is to prevent automatic prularized the collection name
 
-module.exports = Product
+module.exports = Category

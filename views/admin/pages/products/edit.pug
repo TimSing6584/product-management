@@ -74,8 +74,13 @@ block main
                     img(src=product.images upload-image-preview)
             .col-md-6
                 label(for="category") Category
-                input(value=product.category type="text" id="category" name="category")
-
+                select#category(name="category" required)
+                    option(value="" disabled) -- Select category --
+                    each category in categories
+                        option(
+                            value=category._id
+                            selected=(product.category && category._id.toString() === product.category._id.toString())
+                        )= category.name
             .col-md-6
                 label(for="position") Display Position
                 input(

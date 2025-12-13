@@ -1,8 +1,30 @@
 extends ../../layouts/default.pug
+include ../../mixins/pagination.pug
 block style
     link(href="/admin/css/category.css" rel="stylesheet")
 block main
     h1 Product Category
-    
+    table.table.table-hover.table-sm
+        thead
+            tr
+                th N.o
+                th Category
+                th Quantity
+                th Action
+        tbody
+            each item, index in categories
+                tr
+                    //- td #{index + 1 + (pagination.currentPage - 1) * pagination.limitItems}
+                    td #{index + 1}
+                    td #{item.name}
+                    td #{item.quantity}
+                    td
+                        a(
+                            class="btn btn-warning btn-sm modify"
+                            href=`/admin/category/edit/${item.id}`
+                        ) Modify
+                        //- href=`/admin/category/edit/${item.id}?page=${pagination.currentPage}`
+                        button(class="btn btn-danger btn-sm ml-1 delete" data-id=item.id) Delete
+    //- +pagination(pagination)
 block script
     script(src="/admin/js/category.js")

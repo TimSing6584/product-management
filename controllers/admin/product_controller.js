@@ -1,4 +1,5 @@
 const Product = require("../../models/product_model.js")
+const Category = require("../../models/category_model.js")
 const filterStockHelper = require("../../helpers/filter_stock.js")
 const searchHelper = require("../../helpers/search.js")
 const paginationHelper = require("../../helpers/pagination.js")
@@ -42,6 +43,7 @@ module.exports.index = async (req, res) => {
                                         .limit(pagination.limitItems)
                                         .skip((pagination.currentPage - 1) * pagination.limitItems)
                                         .sort({[sortKey]: sortValue})
+                                        .populate("category")
     res.render("admin/pages/products/index.pug", {
         titlePage: "Admin Product Page",
         products: filterProducts,
@@ -104,11 +106,13 @@ module.exports.delete = async (req, res) => {
 }
 
 // [GET] /admin/product/create
-module.exports.create_get = (req, res) => {
+module.exports.create_get = async (req, res) => {
     const currentPage = parseInt(req.query.page)
+    const categories = await Category.find({deleted: false})
     res.render("admin/pages/products/create.pug", {
         titlePage: "Create New Product",
-        currentPage: currentPage
+        currentPage: currentPage,
+        categories: categories
     })
 }
 
@@ -133,13 +137,15 @@ module.exports.create_post = async (req, res) => {
 // [GET] /admin/product/edit/:id
 module.exports.edit_get = async (req, res) => {
     const currentPage = req.query.page
+    const categories = await Category.find({deleted: false})
     try{
         const product_id = req.params.id
         const product = await Product.findById(product_id)
         res.render("admin/pages/products/edit.pug", {
             titlePage: "Edit Product",
             product: product,
-            currentPage: currentPage
+            currentPage: currentPage,
+            categories: categories
         })
     }
     catch(error){
@@ -171,7 +177,7 @@ module.exports.detail = async (req, res) => {
     const currentPage = req.query.page
     try{
         const product_id = req.params.id
-        const product = await Product.findById(product_id)
+        const product = await Product.findById(product_id).populate("category")
         res.render("admin/pages/products/detail.pug", {
             titlePage: product.title,
             product: product,

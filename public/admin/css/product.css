@@ -107,7 +107,7 @@ form[form-change-multi]{
 }
 
 
-.product-form input {
+.product-form input, .product-form select{
     width: 100%;
     padding: 10px 14px;
     border-radius: 10px;
@@ -116,7 +116,7 @@ form[form-change-multi]{
     font-size: 14px;
 }
 
-.product-form input:focus {
+.product-form input:focus, .product-form select:focus {
     border-color: #1a73e8;
     outline: none;
     box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
