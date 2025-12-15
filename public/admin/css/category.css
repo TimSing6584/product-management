@@ -118,3 +118,10 @@ a[modify-category], button[delete-category]{
     border: 1px solid #eee;
 }
 /* End edit category */
+
+/* Create new category */
+a[create-category]{
+    margin-bottom : 40px;
+    margin-top: 20px
+}
+/* End create new category */

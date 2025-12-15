@@ -10,7 +10,10 @@ block main
 
     +alert-success("5000")
     +alert-error("5000")
-
+    a.btn.btn-outline-success(
+        create-category
+        href=`/admin/category/create`
+    ) + New Category
     table.table.table-hover.table-sm
         thead
             tr

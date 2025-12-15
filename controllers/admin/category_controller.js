@@ -60,3 +60,18 @@ module.exports.delete = async (req, res) => {
         res.redirect('/admin/category')
     }
 }
+
+// [GET] /admin/category/create
+module.exports.create_get = async (req, res) => {
+    const categories = await Category.find({deleted: false})
+    res.render("admin/pages/category/create.pug", {
+        titlePage: "Create Category",
+        all_categories: categories
+    })
+}
+// [POST] /admin/category/create
+module.exports.create_post = async (req, res) => {
+    await Category.create(req.body)
+    req.flash("success", "You have successfully created new category")
+    res.redirect(`/admin/category`)
+}

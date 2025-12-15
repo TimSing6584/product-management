@@ -1,0 +1,33 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block style
+    link(href="/admin/css/category.css" rel="stylesheet")
+block main
+    .category-edit
+        h2 Create Category
+        +alert-error("5000")
+        form(
+            action=`/admin/category/create`
+            method="POST"
+        )
+            .form-group
+                label(for="name") Category Name
+                input(
+                    type="text"
+                    id="name"
+                    name="name"
+                    value=""
+                    required
+                )
+
+            button.btn-submit(type="submit") Save Changes
+            a.btn-cancel(href="/admin/category") Cancel
+
+        if all_categories.length
+            hr
+            h4 Existing Categories
+            ul.category-hint
+                each c in all_categories
+                    li= c.name
+block script
+    script(src="/admin/js/category.js")
