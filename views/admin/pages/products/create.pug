@@ -94,7 +94,8 @@ block main
         .mt-4.text-end
             a.btn-reset.text-decoration-none(
                 href=`/admin/product?page=${currentPage}`
+                cancel-create-product
             ) Cancel
-            button.btn-submit(type="submit") Create Product
+            button.btn-submit(type="submit" submit-create-product) Create Product
 block script
     script(src="/admin/js/product.js")

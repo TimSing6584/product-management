@@ -1,6 +1,6 @@
 @import url("./helpers/alert.css");
 @import url("./helpers/search_form.css");
-
+@import url("./helpers/preview_image.css");
 /* Header */
 .header {
     background: linear-gradient(90deg, #111827, #1f2933);

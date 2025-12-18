@@ -9,6 +9,7 @@ block main
 
     +alert-success("5000")
     +alert-error("5000")
+
     a.btn.btn-outline-success(
         create-role
         href=`/admin/role/create`
@@ -19,6 +20,7 @@ block main
                 th N.o
                 th Role
                 th Short Desciption
+                th Quantity
                 th Action
         tbody
             each item, index in roles
@@ -26,6 +28,7 @@ block main
                     td #{index + 1}
                     td #{item.name}
                     td #{item.description}
+                    td #{item.quantity}
                     td
                         a(
                             class="btn btn-warning btn-sm"

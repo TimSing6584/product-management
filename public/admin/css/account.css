@@ -1,0 +1,89 @@
+/* Page Layout */
+a[modify-account], button[delete-account]{
+    margin-right: 2px;
+}
+a[create-role]{
+    margin: 30px 0;
+}
+/* End Page Layout */
+
+
+/* Account Create Form */
+.account-form {
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 32px;
+}
+.account-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.account-form label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 4px;
+    display: block;
+}
+.account-form input, .account-form select{
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: 0.2s ease;
+}
+.account-form input:focus, .account-form select:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+}
+.account-form .btn-submit {
+    background: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    transition: 0.2s;
+}
+
+.account-form .btn-submit:hover {
+    background: #155cc0;
+}
+.account-form .btn-reset {
+    background: #f2f2f2;
+    color: #555;
+    padding: 10px 20px;
+    border: none;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.account-form .btn-reset:hover {
+    background: #e0e0e0;
+}
+.account-form textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: 0.2s ease;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 120px;
+}
+.account-form textarea:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+}
+.btn-reset[cancel-create-account]{
+    border-radius: 8px;
+}
+.btn-reset[cancel-create-account],
+.btn-submit[submit-create-account] {
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+    padding: 10px 20px;  /* match button padding */
+    line-height: 1.5;    /* fix vertical alignment */
+}
+/* End Account account Form */

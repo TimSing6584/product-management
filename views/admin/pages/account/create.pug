@@ -1,0 +1,82 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block style
+    link(href="/admin/css/account.css" rel="stylesheet")
+block main
+    +alert-success("5000")
+    +alert-error("5000")
+
+    form#create-form.account-form(
+        action=`/admin/account/create`
+        enctype="multipart/form-data"
+        method="POST"
+    )
+        h2 Create New Account
+
+        .row.g-3
+            .col-md-6
+                label(for="fullname") Full Name
+                input(
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    placeholder="* Required"
+                    required
+                )
+
+            .col-md-6
+                label(for="email") Email
+                input(
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="* Required"
+                    required
+                )
+
+            .col-md-6
+                label(for="password") Password
+                input(
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="* Required"
+                    required
+                )
+
+            .col-md-6
+                label(for="phone") Phone
+                input(
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="* Required"
+                    required
+                )
+            .col-12
+                label(for="role") Role
+                select(id="role" name="role" required)
+                    option(value="" disabled selected) -- Select Role --
+                    each role in roles
+                        option(value=role._id)= role.name
+            .col-12
+                label(for="avatar") Avatar
+                input(
+                    type="file"
+                    class="form-control-file"
+                    id="avatar"
+                    name="avatar"
+                    accept="image/*"
+                    upload-image-input
+                )
+                img(src="" upload-image-preview)
+
+
+        .mt-4.text-end
+            a.btn-reset.text-decoration-none(
+                href=`/admin/account`
+                cancel-create-account
+            ) Cancel
+            button.btn-submit(type="submit" submit-create-account) Create Account
+block script
+    script(src="/admin/js/account.js")

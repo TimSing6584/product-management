@@ -1,7 +1,17 @@
 const Role = require("../../models/role_model.js")
+const Account = require("../../models/account_model.js")
 // [GET] /admin/role
 module.exports.index = async (req, res) => {
-    const roles = await Role.find({deleted: false})
+    const roles = await Role.find({deleted: false}).lean()
+    // Count how many accounts have this role
+    for(let i = 0; i < roles.length; i ++){
+        const quantity = await Account.countDocuments({
+            role: roles[i]._id,
+            deleted: false
+        })
+        roles[i].quantity = quantity
+        roles[i].id = roles[i]._id.toString()
+    }
     res.render("admin/pages/role/index.pug", {
         titlePage: "Roles Management",
         roles: roles
@@ -50,11 +60,12 @@ module.exports.edit_patch = async (req, res) => {
 module.exports.delete = async (req, res) => {
     try{
         const role_id = req.params.id
-        // Count how many users currently have this category
-        // const users_no = await User.countDocuments({category: role_id})
-        // if(users_no > 0){
-        //     throw new Error("You can’t delete a role that still has users")
-        // }
+        // Count how many accounts currently have this category
+        const account_no = await Account.countDocuments({role: role_id})
+        console.log(account_no)
+        if(account_no > 0){
+            throw new Error("You can’t delete a role that still has users")
+        }
         await Role.updateOne({"_id": role_id}, {"deleted": true, "deleteTime": new Date()})
         req.flash("success", "You have successfully deleted role")
     }

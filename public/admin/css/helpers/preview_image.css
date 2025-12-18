@@ -1,0 +1,10 @@
+/* Preview image */
+img[upload-image-preview]:not([src=""]) {
+    width: 150px;
+    height: 150px;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd
+}
+/* End preview image */

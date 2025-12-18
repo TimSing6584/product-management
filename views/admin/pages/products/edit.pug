@@ -101,8 +101,11 @@ block main
                 )= product.description
 
         .mt-4.text-end
-            a.btn-reset.text-decoration-none(href="/admin/product") Cancel
-            button.btn-submit(type="submit") Update
+            a.btn-reset.text-decoration-none(
+                href="/admin/product"
+                cancel-create-product
+            ) Cancel
+            button.btn-submit(type="submit" submit-create-product) Update
 
 block script
     script(src="/admin/js/product.js")

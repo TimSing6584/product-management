@@ -1,0 +1,88 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block style
+    link(href="/admin/css/account.css" rel="stylesheet")
+block main
+    +alert-success("5000")
+    +alert-error("5000")
+
+    form#create-form.account-form(
+        action=`/admin/account/edit/${account._id}?_method=PATCH`
+        enctype="multipart/form-data"
+        method="POST"
+    )
+        h2 Edit Account
+
+        .row.g-3
+            .col-md-6
+                label(for="fullname") Full Name
+                input(
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    placeholder="* Required"
+                    value=account.fullname
+                    required
+                )
+
+            .col-md-6
+                label(for="email") Email
+                input(
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="* Required"
+                    value=account.email
+                    required
+                )
+
+            .col-md-6
+                label(for="password") Password
+                input(
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Change Password"
+                )
+
+            .col-md-6
+                label(for="phone") Phone
+                input(
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="* Required"
+                    value=account.phone
+                    required
+                )
+            .col-12
+                label(for="role") Role
+                select(name="role" required)
+                    option(value="" disabled) -- Select category --
+                    each role in roles
+                        option(
+                            value=role._id
+                            selected=(role.category && role._id.toString() === account.role._id.toString())
+                        )= role.name
+            .col-12
+                label(for="avatar") Avatar
+                input(
+                    type="file"
+                    class="form-control-file"
+                    id="avatar"
+                    name="avatar"
+                    accept="image/*"
+                    upload-image-input
+                )
+                if account.avatar
+                    img(src=account.avatar upload-image-preview)
+
+
+        .mt-4.text-end
+            a.btn-reset.text-decoration-none(
+                href=`/admin/account`
+                cancel-create-account
+            ) Cancel
+            button.btn-submit(type="submit" submit-create-account) Create Account
+block script
+    script(src="/admin/js/account.js")

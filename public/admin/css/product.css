@@ -187,3 +187,135 @@ input[type="checkbox"] {
     color: #ffffff;
 }
 /* End pagination */
+
+/* Detail Product */
+.product-detail {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+.product-image img {
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.product-info {
+    padding-top: 10px;
+}
+.info-item {
+    margin-bottom: 14px;
+    font-size: 16px;
+}
+.info-item strong {
+    display: inline-block;
+    width: 130px;
+    font-weight: 600;
+    color: #333;
+}
+.description-section {
+    margin-top: 25px;
+}
+.description-section strong {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 6px;
+    color: #222;
+}
+.description-text {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: #555;
+    margin-top: 4px;
+    white-space: pre-line;
+}
+/* End detail product */
+
+
+/*Product Create Form */
+.product-form {
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 32px;
+}
+.product-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.product-form label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 4px;
+    display: block;
+}
+.product-form input, .product-form select{
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: 0.2s ease;
+}
+.product-form input:focus, .product-form select:focus {
+    border-color: #1a73e8;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+}
+.product-form .btn-submit {
+    background: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    transition: 0.2s;
+}
+
+.product-form .btn-submit:hover {
+    background: #155cc0;
+}
+.product-form .btn-reset {
+    background: #f2f2f2;
+    color: #555;
+    padding: 10px 20px;
+    border: none;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.product-form .btn-reset:hover {
+    background: #e0e0e0;
+}
+.product-form textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: 0.2s ease;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 120px;
+}
+.product-form textarea:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
+}
+.btn-reset[cancel-create-product]{
+    border-radius: 8px;
+}
+.btn-reset[cancel-create-product],
+.btn-submit[submit-create-product] {
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+    padding: 10px 20px;  /* match button padding */
+    line-height: 1.5;    /* fix vertical alignment */
+}
+/* End Create Product Form */
