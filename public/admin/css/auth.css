@@ -1,0 +1,89 @@
+@import url("./helpers/alert.css");
+@import url("./helpers/search_form.css");
+@import url("./helpers/preview_image.css");
+/* General auth.pug */
+.auth-wrapper {
+    min-height: 100vh;
+    background:
+    radial-gradient(circle at top left, #e0e7ff, transparent 60%),
+    radial-gradient(circle at bottom right, #c7d2fe, transparent 60%),
+    #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* End general auth.pug */
+
+
+/* Login form */
+
+#form-login {
+    background: #fff;
+    padding: 32px 36px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+#form-login-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #111;
+}
+
+#form-login .form-group {
+    margin-bottom: 18px;
+}
+
+#form-login label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+#form-login input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #d0d5dd;
+    transition: all 0.2s ease;
+}
+
+#form-login input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    outline: none;
+}
+
+#form-login button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#form-login button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+}
+
+#form-login button:active {
+    transform: translateY(0);
+}
+
+#form-login .alert {
+    margin-bottom: 20px;
+}
+/* End login form */
