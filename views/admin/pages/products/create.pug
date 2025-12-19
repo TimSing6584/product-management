@@ -3,99 +3,102 @@ include ../../mixins/alert.pug
 block style
     link(href="/admin/css/product.css" rel="stylesheet")
 block main
-    +alert-error("5000")
-    form#create-form.product-form(
-        action=`/admin/product/create`
-        enctype="multipart/form-data"
-        method="POST"
-    )
-        h2 Create New Product
+    if role.permissions.includes("products-list-create")
+        +alert-error("5000")
+        form#create-form.product-form(
+            action=`/admin/product/create`
+            enctype="multipart/form-data"
+            method="POST"
+        )
+            h2 Create New Product
 
-        .row.g-3
-            .col-md-6
-                label(for="title") Title
-                input(
-                    type="text"
-                    id="title"
-                    name="title"
-                    placeholder="* Required"
-                    required
-                )
+            .row.g-3
+                .col-md-6
+                    label(for="title") Title
+                    input(
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="* Required"
+                        required
+                    )
 
-            .col-md-6
-                label(for="price") Price ($)
-                input(
-                    type="number"
-                    id="price"
-                    name="price"
-                    min="0"
-                    step="0.01"
-                    placeholder="* Required"
-                    required
-                )
+                .col-md-6
+                    label(for="price") Price ($)
+                    input(
+                        type="number"
+                        id="price"
+                        name="price"
+                        min="0"
+                        step="0.01"
+                        placeholder="* Required"
+                        required
+                    )
 
-            .col-md-6
-                label(for="discountPercentage") Discount (%)
-                input(
-                    type="number"
-                    id="discountPercentage"
-                    name="discountPercentage"
-                    min="0"
-                    max="100"
-                )
+                .col-md-6
+                    label(for="discountPercentage") Discount (%)
+                    input(
+                        type="number"
+                        id="discountPercentage"
+                        name="discountPercentage"
+                        min="0"
+                        max="100"
+                    )
 
-            .col-md-6
-                label(for="stock") Stock
-                input(
-                    type="number"
-                    id="stock"
-                    name="stock"
-                    min="0"
-                    placeholder="* Required"
-                    required
-                )
+                .col-md-6
+                    label(for="stock") Stock
+                    input(
+                        type="number"
+                        id="stock"
+                        name="stock"
+                        min="0"
+                        placeholder="* Required"
+                        required
+                    )
 
-            .col-12
-                label(for="images") Image
-                input(
-                    type="file"
-                    class="form-control-file"
-                    id="images" name="images"
-                    accept="image/*"
-                    upload-image-input
-                )
-                img(src="" upload-image-preview)
-            .col-md-6
-                label(for="category") Category
-                select(id="category" name="category" required)
-                    option(value="" disabled selected) -- Select category --
-                    each category in categories
-                        option(value=category._id)= category.name
+                .col-12
+                    label(for="images") Image
+                    input(
+                        type="file"
+                        class="form-control-file"
+                        id="images" name="images"
+                        accept="image/*"
+                        upload-image-input
+                    )
+                    img(src="" upload-image-preview)
+                .col-md-6
+                    label(for="category") Category
+                    select(id="category" name="category" required)
+                        option(value="" disabled selected) -- Select category --
+                        each category in categories
+                            option(value=category._id)= category.name
 
 
-            .col-md-6
-                label(for="position") Display Position
-                input(
-                    type="number"
-                    id="position"
-                    name="position"
-                    min="1"
-                    placeholder="Append to the end by default"
-                )
+                .col-md-6
+                    label(for="position") Display Position
+                    input(
+                        type="number"
+                        id="position"
+                        name="position"
+                        min="1"
+                        placeholder="Append to the end by default"
+                    )
 
-            .col-12
-                label(for="description") Description
-                textarea#description(
-                    name="description"
-                    rows="4"
-                    placeholder="Enter product description..."
-                )
+                .col-12
+                    label(for="description") Description
+                    textarea#description(
+                        name="description"
+                        rows="4"
+                        placeholder="Enter product description..."
+                    )
 
-        .mt-4.text-end
-            a.btn-reset.text-decoration-none(
-                href=`/admin/product?page=${currentPage}`
-                cancel-create-product
-            ) Cancel
-            button.btn-submit(type="submit" submit-create-product) Create Product
+            .mt-4.text-end
+                a.btn-reset.text-decoration-none(
+                    href=`/admin/product?page=${currentPage}`
+                    cancel-create-product
+                ) Cancel
+                button.btn-submit(type="submit" submit-create-product) Create Product
+    else
+        h1 Oops !!! You need authorization to access
 block script
     script(src="/admin/js/product.js")

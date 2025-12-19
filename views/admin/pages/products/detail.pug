@@ -39,7 +39,8 @@ block main
 
     .mt-4.text-end
         a.btn.btn-secondary(href=`/admin/product?page=${currentPage}`) Back
-        a.btn.btn-primary(href=`/admin/product/edit/${product.id}`) Modify
+        if role.permissions.includes("products-list-edit")
+            a.btn.btn-primary(href=`/admin/product/edit/${product.id}`) Modify
 
 block script
     script(src="/admin/js/product.js")

@@ -4,79 +4,107 @@ include ../../mixins/role_checkbox.pug
 block style
     link(href="/admin/css/role.css" rel="stylesheet")
 block main
-    +alert-success("5000")
-    h1 Permissions Management
-    div(update-permission)
-        button.btn.btn-primary.mb-3(
-            type="button"
-            button-submit
-        ) Update
+    if role.permissions.includes("role-permission")
+        +alert-success("5000")
+        h1 Permissions Management
+        div(update-permission)
+            button.btn.btn-primary.mb-3(
+                type="button"
+                button-submit
+            ) Update
 
-    table.table.table-hover.table-sm.permission
-        thead
-            tr
-                th Feature
-                each role in records
-                    th.text-center #{role.name}
-        tbody
-            tr(data-name="id")
-                td.d-none
-                each role in records
-                    td.text-center.d-none
-                        input(type="text" value=role.id)
-            tr
-                td(colspan=records.length + 1)
-                    b Product Category
-            tr(data-name="products-category-view")
-                td View
-                +role_checkbox(records, "products-category-view")
-            tr(data-name="products-category-create")
-                td Create
-                +role_checkbox(records, "products-category-create")
-            tr(data-name="products-category-edit")
-                td Edit
-                +role_checkbox(records, "products-category-edit")
-            tr(data-name="products-category-delete")
-                td Delete
-                +role_checkbox(records, "products-category-delete")
-            tr
-                td(colspan=records.length + 1)
-                    b Product List
-            tr(data-name="products-list-view")
-                td View
-                +role_checkbox(records, "products-list-view")
-            tr(data-name="products-list-create")
-                td Create
-                +role_checkbox(records, "products-list-create")
-            tr(data-name="products-list-edit")
-                td Edit
-                +role_checkbox(records, "products-list-edit")
-            tr(data-name="products-list-delete")
-                td Delete
-                +role_checkbox(records, "products-list-delete")
-            tr
-                td(colspan=records.length + 1)
-                    b Roles
-            tr(data-name="role-create")
-                td Create
-                +role_checkbox(records, "role-create")
-            tr(data-name="role-edit")
-                td Edit
-                +role_checkbox(records, "role-edit")
-            tr(data-name="role-delete")
-                td Delete
-                +role_checkbox(records, "role-delete")
-    form(
-        class="d-none"
-        id="form-change-permissions"
-        method="POST"
-        action="/admin/role/permission?_method=PATCH"
-    )
-        .form-group
-            input(
-                type="text"
-                class="form-control d-none"
-                name="permissions"
-            )
+        table.table.table-hover.table-sm.permission
+            thead
+                tr
+                    th Feature
+                    each role in records
+                        th.text-center #{role.name}
+            tbody
+                tr(data-name="id")
+                    td.d-none
+                    each role in records
+                        td.text-center.d-none
+                            input(type="text" value=role.id)
+                //- --------------------------------------------
+                tr
+                    td(colspan=records.length + 1)
+                        b Product List
+                tr(data-name="products-list-view")
+                    td View
+                    +role_checkbox(records, "products-list-view")
+                tr(data-name="products-list-create")
+                    td Create
+                    +role_checkbox(records, "products-list-create")
+                tr(data-name="products-list-edit")
+                    td Edit
+                    +role_checkbox(records, "products-list-edit")
+                tr(data-name="products-list-delete")
+                    td Delete
+                    +role_checkbox(records, "products-list-delete")
+                //- --------------------------------------------
+                tr
+                    td(colspan=records.length + 1)
+                        b Product Category
+                tr(data-name="products-category-view")
+                    td View
+                    +role_checkbox(records, "products-category-view")
+                tr(data-name="products-category-create")
+                    td Create
+                    +role_checkbox(records, "products-category-create")
+                tr(data-name="products-category-edit")
+                    td Edit
+                    +role_checkbox(records, "products-category-edit")
+                tr(data-name="products-category-delete")
+                    td Delete
+                    +role_checkbox(records, "products-category-delete")
+                //- --------------------------------------------
+                tr
+                    td(colspan=records.length + 1)
+                        b Roles
+                tr(data-name="role-view")
+                    td View
+                    +role_checkbox(records, "role-view")
+                tr(data-name="role-create")
+                    td Create
+                    +role_checkbox(records, "role-create")
+                tr(data-name="role-edit")
+                    td Edit
+                    +role_checkbox(records, "role-edit")
+                tr(data-name="role-delete")
+                    td Delete
+                    +role_checkbox(records, "role-delete")
+                tr(data-name="role-permission")
+                    td Control Permission
+                    +role_checkbox(records, "role-permission")
+                //- --------------------------------------------
+                tr
+                    td(colspan=records.length + 1)
+                        b Accounts
+                tr(data-name="account-view")
+                    td View
+                    +role_checkbox(records, "account-view")
+                tr(data-name="account-create")
+                    td Create
+                    +role_checkbox(records, "account-create")
+                tr(data-name="account-edit")
+                    td Edit
+                    +role_checkbox(records, "account-edit")
+                tr(data-name="account-delete")
+                    td Delete
+                    +role_checkbox(records, "account-delete")
+        form(
+            class="d-none"
+            id="form-change-permissions"
+            method="POST"
+            action="/admin/role/permission?_method=PATCH"
+        )
+            .form-group
+                input(
+                    type="text"
+                    class="form-control d-none"
+                    name="permissions"
+                )
+    else
+        h1 Oops !!! You need authorization to access
 block script
     script(src="/admin/js/role.js")

@@ -3,7 +3,10 @@ header.header
         .row.align-items-center
             .col-3
                 .inner-logo
-                    a(href="/admin") ADMIN
+                    if role.name == "Administrator"
+                        a(href="/admin") ADMIN
+                    else
+                        a(href="/admin") STAFF
             .col-9
                 div.text-right
                     a(

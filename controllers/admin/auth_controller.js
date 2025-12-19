@@ -19,7 +19,7 @@ module.exports.login_get = async (req, res) => {
 module.exports.login_post = async (req, res, next) => {
     const email = req.body.email
     const password = req.body.password
-    const user = await Account.findOne({email: email, deleted: false}).populate("role")
+    const user = await Account.findOne({email: email, deleted: false})
     if(!user){
         req.flash("error", "Your email is incorrect")
         res.redirect(req.get('referer'))
@@ -34,7 +34,7 @@ module.exports.login_post = async (req, res, next) => {
     const token = jwt.sign(
         {
             id: user._id,
-            role: user.role.name
+            role: user.role
         },
         process.env.JWT_SECRET_KEY,
         { expiresIn: "1h" }

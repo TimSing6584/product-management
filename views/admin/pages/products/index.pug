@@ -10,93 +10,102 @@ include ../../mixins/delete_item.pug
 block style
     link(href="/admin/css/product.css" rel="stylesheet")
 block main
-    h1 Product List
+    if role.permissions.includes("products-list-view")
+        h1 Product List
 
-    +alert-success("5000")
-    +alert-error("5000")
-    .card.mb-3
-        .card-header Search and Filter
-        .card-body
-            .row
-                .col-6
-                    +filter-buttons(filterButtons)
-                .col-6
-                    +search(last_search_word)
+        +alert-success("5000")
+        +alert-error("5000")
+        .card.mb-3
+            .card-header Search and Filter
+            .card-body
+                .row
+                    .col-6
+                        +filter-buttons(filterButtons)
+                    .col-6
+                        +search(last_search_word)
 
-    .row.d-flex.align-items-center
-        .col-3
-            +form_change_multi("/admin/product/change-multi?_method=PATCH")
-        .col-3
-            +sorting()
-        .col-6.d-flex.justify-content-end
-            a.btn.btn-outline-success(
-                href=`/admin/product/create?page=${pagination.currentPage}`
-            ) + Create Product
+        .row.d-flex.align-items-center
+            .col-3
+                +form_change_multi("/admin/product/change-multi?_method=PATCH")
+            .col-3
+                +sorting()
+            .col-6.d-flex.justify-content-end
+                if role.permissions.includes("products-list-create")
+                    a.btn.btn-outline-success(
+                        href=`/admin/product/create?page=${pagination.currentPage}`
+                    ) + Create Product
 
-    table.table.table-hover.table-sm
-        thead
-            tr
-                th
-                    input(type="checkbox" name="check-all")
-                th N.o
-                th Image
-                th Title
-                //- th Description
-                th Category
-                th Price
-                th Position
-                th Discount
-                th Stock
-                th Action
-        tbody
-            each item, index in products
+        table.table.table-hover.table-sm
+            thead
                 tr
-                    td
-                        input(type="checkbox" name="id" value=item.id)
-                    td #{index + 1 + (pagination.currentPage - 1) * pagination.limitItems}
-                    //- calculate accurate index at each page
-                    td
-                        img(
-                            src=item.images
-                            alt="Product 1"
-                            width="100px"
-                            height="100px"
-                        )
-                    td.title-column #{item.title}
-                    //- td
-                    //-     button(class="btn btn-link" show-description) Read
-                    //-     .popup-overlay.d-none
-                    //-         .popup-box
-                    //-             button.close-popup(type="button") ×
-                    //-             h4 Description
-                    //-             p #{item.description}
-                    td #{item.category.name}
-                    td #{item.price}$
-                    td
-                        input(name="position" value=item.position type="number" style="width: 60px" min="1")
-                    td #{item.discountPercentage}%
-                    td
-                        button(class="btn bg-transparent stock-counter" counter_value="decrement" data-id=item.id) -
-                        div(class=` ${item.stock > 0 ? "badge bg-success" : "badge bg-danger"}`) #{item.stock}
-                        button(class="btn bg-transparent stock-counter" counter_value="increment" data-id=item.id) +
-                    td
-                        a(
-                            class="btn btn-sm btn-secondary"
-                            href=`/admin/product/detail/${item.id}?page=${pagination.currentPage}`
-                        ) Detail
-                        a(
-                            class="btn btn-warning btn-sm modify"
-                            href=`/admin/product/edit/${item.id}?page=${pagination.currentPage}`
-                        ) Modify
-                        button(
-                            class="btn btn-danger btn-sm ml-1 delete"
-                            data-id=item.id
-                            delete-product
-                        ) Delete
-    +pagination(pagination)
+                    th
+                        input(type="checkbox" name="check-all")
+                    th N.o
+                    th Image
+                    th Title
+                    //- th Description
+                    th Category
+                    th Price
+                    th Position
+                    th Discount
+                    th Stock
+                    th Action
+            tbody
+                each item, index in products
+                    tr
+                        td
+                            input(type="checkbox" name="id" value=item.id)
+                        td #{index + 1 + (pagination.currentPage - 1) * pagination.limitItems}
+                        //- calculate accurate index at each page
+                        td
+                            img(
+                                src=item.images
+                                alt="Product 1"
+                                width="100px"
+                                height="100px"
+                            )
+                        td.title-column #{item.title}
+                        //- td
+                        //-     button(class="btn btn-link" show-description) Read
+                        //-     .popup-overlay.d-none
+                        //-         .popup-box
+                        //-             button.close-popup(type="button") ×
+                        //-             h4 Description
+                        //-             p #{item.description}
+                        td #{item.category.name}
+                        td #{item.price}$
+                        td
+                            input(name="position" value=item.position type="number" style="width: 60px" min="1")
+                        td #{item.discountPercentage}%
+                        td
+                            if role.permissions.includes("products-list-edit")
+                                button(class="btn bg-transparent stock-counter" counter_value="decrement" data-id=item.id) -
+                            div(class=` ${item.stock > 0 ? "badge bg-success" : "badge bg-danger"}`) #{item.stock}
+                            if role.permissions.includes("products-list-edit")
+                                button(class="btn bg-transparent stock-counter" counter_value="increment" data-id=item.id) +
+                        td
+                            a(
+                                class="btn btn-sm btn-secondary"
+                                href=`/admin/product/detail/${item.id}?page=${pagination.currentPage}`
+                            ) Detail
+                            if role.permissions.includes("products-list-edit")
+                                a(
+                                    class="btn btn-warning btn-sm modify"
+                                    href=`/admin/product/edit/${item.id}?page=${pagination.currentPage}`
+                                ) Modify
+                            if role.permissions.includes("products-list-delete")
+                                button(
+                                    class="btn btn-danger btn-sm ml-1 delete"
+                                    data-id=item.id
+                                    delete-product
+                                ) Delete
+        +pagination(pagination)
 
-    form(id="change-stock" action="" method="POST" path="/admin/product/change-stock")
-    //- form(id="delete-product" action="" method="POST" path="/admin/product/delete")
-    +delete_item("product")
+        form(id="change-stock" action="" method="POST" path="/admin/product/change-stock")
+        //- form(id="delete-product" action="" method="POST" path="/admin/product/delete")
+        +delete_item("product")
+
+    else
+        h1 Oops !!! You need authorization to access
 block script
     script(src="/admin/js/product.js")

@@ -7,46 +7,54 @@ include ../../mixins/search.pug
 block style
     link(href="/admin/css/category.css" rel="stylesheet")
 block main
-    h1 Product Category
+    if role.permissions.includes("products-category-view")
+        h1 Product Category
 
-    +alert-success("5000")
-    +alert-error("5000")
-    .row.align-items-center
-        .col-8.d-flex.align-items-center
-            a.btn.btn-outline-success(
-                create-category
-                href=`/admin/category/create`
-            ) + New Category
-        .col-4.d-flex.justify-content-end.align-items-center
-            +search(last_search_word)
-    table.table.table-hover.table-sm
-        thead
-            tr
-                th N.o
-                th Category
-                th Quantity
-                th Action
-        tbody
-            each item, index in categories
+        +alert-success("5000")
+        +alert-error("5000")
+        .row.align-items-center
+            .col-8.d-flex.align-items-center
+                if role.permissions.includes("products-category-create")
+                    a.btn.btn-outline-success(
+                        create-category
+                        href=`/admin/category/create`
+                    ) + New Category
+            .col-4.d-flex.justify-content-end.align-items-center
+                +search(last_search_word)
+        table.table.table-hover.table-sm
+            thead
                 tr
-                    //- td #{index + 1 + (pagination.currentPage - 1) * pagination.limitItems}
-                    td #{index + 1}
-                    td #{item.name}
-                    td #{item.quantity}
-                    td
-                        a(
-                            class="btn btn-warning btn-sm"
-                            href=`/admin/category/edit/${item.id}`
-                            modify-category
+                    th N.o
+                    th Category
+                    th Quantity
+                    if role.permissions.includes("products-category-delete") || role.permissions.includes("products-category-edit")
+                        th Action
+            tbody
+                each item, index in categories
+                    tr
+                        //- td #{index + 1 + (pagination.currentPage - 1) * pagination.limitItems}
+                        td #{index + 1}
+                        td #{item.name}
+                        td #{item.quantity}
+                        if role.permissions.includes("products-category-delete") || role.permissions.includes("products-category-edit")
+                            td
+                                if role.permissions.includes("products-category-edit")
+                                    a(
+                                        class="btn btn-warning btn-sm"
+                                        href=`/admin/category/edit/${item.id}`
+                                        modify-category
 
-                        ) Modify
-                        //- href=`/admin/category/edit/${item.id}?page=${pagination.currentPage}`
-                        button(
-                            class="btn btn-danger btn-sm ml-1 delete"
-                            data-id=item.id
-                            delete-category
-                        ) Delete
-    //- +pagination(pagination)
-    +delete_item("category")
+                                    ) Modify
+                                //- href=`/admin/category/edit/${item.id}?page=${pagination.currentPage}`
+                                if role.permissions.includes("products-category-delete")
+                                    button(
+                                        class="btn btn-danger btn-sm ml-1 delete"
+                                        data-id=item.id
+                                        delete-category
+                                    ) Delete
+        //- +pagination(pagination)
+        +delete_item("category")
+    else
+        h1 Oops !!! You need authorization to access
 block script
     script(src="/admin/js/category.js")
