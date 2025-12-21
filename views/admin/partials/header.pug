@@ -1,3 +1,4 @@
+script(src="https://kit.fontawesome.com/15f24667ff.js" crossorigin="anonymous")
 header.header
     .container-fluid
         .row.align-items-center
@@ -9,6 +10,8 @@ header.header
                         a(href="/admin") STAFF
             .col-9
                 div.text-right
+                    a(href="/admin/my_account")
+                        i(class="fa-solid fa-circle-user fa-xl")
                     a(
                         href="/admin/auth/logout"
                         class="btn btn-danger btn-sm header-logout"

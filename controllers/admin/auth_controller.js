@@ -31,10 +31,11 @@ module.exports.login_post = async (req, res, next) => {
         return
     }
     // Generate JWT token
+
     const token = jwt.sign(
         {
-            id: user._id,
-            role: user.role
+            account_id: user._id,
+            role_id: user.role
         },
         process.env.JWT_SECRET_KEY,
         { expiresIn: "1h" }

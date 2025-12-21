@@ -71,6 +71,10 @@
     color: #fee2e2;
     transform: translateY(-1px);
 }
+.header i.fa-solid.fa-circle-user{
+    color: white;
+    margin-right: 15px;
+}
 /* End Header */
 
 /* Body */

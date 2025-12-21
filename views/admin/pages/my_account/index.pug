@@ -1,0 +1,85 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block style
+    link(href="/admin/css/my_account.css" rel="stylesheet")
+block main
+    +alert-success("5000")
+    +alert-error("5000")
+
+    form#create-form.my-account-form(
+        action=`/admin/my_account/edit/${account._id}?_method=PATCH`
+        enctype="multipart/form-data"
+        method="POST"
+    )
+        h2 Edit My Account
+
+        .row.g-3
+            .col-md-6
+                label(for="fullname") Full Name
+                input(
+                    type="text"
+                    id="fullname"
+                    name="fullname"
+                    placeholder="* Required"
+                    value=account.fullname
+                    required
+                )
+
+            .col-md-6
+                label(for="email") Email
+                input(
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="* Required"
+                    value=account.email
+                    required
+                )
+
+            .col-md-6
+                label(for="password") Password
+                input(
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Change Password"
+                )
+
+            .col-md-6
+                label(for="phone") Phone
+                input(
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="* Required"
+                    value=account.phone
+                    required
+                )
+            .col-12
+                label(for="avatar") Avatar
+                input(
+                    type="file"
+                    class="form-control-file"
+                    id="avatar"
+                    name="avatar"
+                    accept="image/*"
+                    upload-image-input
+                )
+                if account.avatar
+                    img(src=account.avatar upload-image-preview)
+            .col-12
+                label.d-none(for="role") Role
+                input.d-none(
+                    type="text"
+                    id="role"
+                    name="role"
+                    value="role"
+                )
+
+        .mt-4.text-end
+            a.btn-reset.text-decoration-none(
+                href=`/admin`
+                cancel-create-account
+            ) Cancel
+            button.btn-submit(type="submit" submit-create-account) Modify Account
+block script

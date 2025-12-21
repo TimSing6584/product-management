@@ -48,7 +48,7 @@ module.exports.edit_patch = async (req, res) => {
     }
     await Account.updateOne({_id: req.params.id}, req.body)
     req.flash("success", "You have successfully modified account")
-    res.redirect("/admin/account")
+    res.redirect(req.get("referrer"))
 }
 
 

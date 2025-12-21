@@ -1,1 +1,0 @@
-// Specific script for Category Page
