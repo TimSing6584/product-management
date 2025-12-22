@@ -15,11 +15,12 @@ block main
 
                 .info-item
                     strong Price:
-                    span $#{product.price}
-                if product.discountPercentage > 0
-                    .info-item
-                        strong Discount:
-                        span #{product.discountPercentage}%
+                    if product.discountPercentage > 0
+                        span.price-new $#{(((100 - product.discountPercentage) * product.price) / 100).toFixed(0)}
+                        span.price-old $#{product.price}
+                        span.price-discount -#{product.discountPercentage}%
+                    else
+                        span.price-new $#{product.price}
 
                 .info-item
                     strong Stock:
@@ -30,6 +31,27 @@ block main
                 .info-item
                     strong Category:
                     span #{product.category.name}
+                .cart-section
+                    form.cart-form(
+                        action=`/cart/add/${product.id}`
+                        method="POST"
+                    )
+                        .quantity-wrapper
+                            label.quantity-label Quantity:
+                            .quantity-control
+                                button.qty-btn(type="button" onclick="this.parentElement.querySelector('input').stepDown()") −
+                                input.qty-input(
+                                    type="number"
+                                    name="quantity"
+                                    value="1"
+                                    min="1"
+                                    max=product.stock
+                                )
+                                button.qty-btn(type="button" onclick="this.parentElement.querySelector('input').stepUp()") +
+                        button.add-to-cart-btn(type="submit")
+                            i.fa-solid.fa-cart-shopping
+                            span Add to Cart
+
         if product.description
             .description-section
                 strong Description:
@@ -37,4 +59,7 @@ block main
 
 
     .mt-4.text-end
-        a.btn.btn-secondary(href=`/product` back-button) Back
+        a.btn.btn-secondary(
+            back-button
+            href="/product" onclick="if (history.length > 1) { history.back(); return false; }"
+        ) Back

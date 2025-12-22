@@ -27,18 +27,23 @@ if(filterSideBar){
         window.location.href = url.toString()
     })
     // Show the selected options
-    const selectedCategories = url.searchParams.get("category").split("_")
-    const selectedPrice = url.searchParams.get("price").split("_")
-    const allCategoryBoxes = filterSideBar.querySelectorAll("input[name='category']")
-    const allPriceBoxes = filterSideBar.querySelectorAll("input[name='price']")
-    allCategoryBoxes.forEach(box => {
-        if(selectedCategories.includes(box.value)){
-            box.checked = true
-        }
-    })
-    allPriceBoxes.forEach(box => {
-        if(selectedPrice.includes(box.value)){
-            box.checked = true
-        }
-    })
+    if(url.searchParams.get("category")){
+        const selectedCategories = url.searchParams.get("category").split("_")
+        const allCategoryBoxes = filterSideBar.querySelectorAll("input[name='category']")
+        allCategoryBoxes.forEach(box => {
+            if(selectedCategories.includes(box.value)){
+                box.checked = true
+            }
+        })
+    }
+    if(url.searchParams.get("price")){
+        const selectedPrice = url.searchParams.get("price").split("_")
+        const allPriceBoxes = filterSideBar.querySelectorAll("input[name='price']")
+        allPriceBoxes.forEach(box => {
+            if(selectedPrice.includes(box.value)){
+                box.checked = true
+            }
+        })
+    }
+
 }

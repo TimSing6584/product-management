@@ -11,7 +11,11 @@ header.header
             .col-9
                 div.text-right
                     a(href="/admin/my_account")
-                        i(class="fa-solid fa-circle-user fa-xl")
+                        if account.avatar
+                            i
+                                img(src=account.avatar account-avatar)
+                        else
+                            i(class="fa-solid fa-circle-user fa-xl")
                     a(
                         href="/admin/auth/logout"
                         class="btn btn-danger btn-sm header-logout"

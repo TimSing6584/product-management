@@ -213,6 +213,10 @@
 .why-card .icon {
     font-size: 36px;
 }
+.why-card .icon img{
+    width: 49px;
+    height: 52px;
+}
 .why-card h3 {
     font-size: 24px;
     margin-bottom: 12px;

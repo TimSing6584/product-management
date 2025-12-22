@@ -14,5 +14,4 @@ if(searchForm){
         window.location.href = url.href
     })
 }
-
 // End Search Form
