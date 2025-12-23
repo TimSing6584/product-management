@@ -1,7 +1,55 @@
 extends ../../layouts/default.pug
+include ../../../utils/alert.pug
+include ../../mixins/box_head.pug
 block style
     link(href="/client/css/cart.css" rel="stylesheet")
 block main
-    h1 HELLO
+    +alert-success("3000")
+    +alert-error("3000")
+    .container.my-3
+        .row
+            .col-12
+                +box-head("Your Cart")
+
+        .cart-table-wrapper
+            table.table
+                thead
+                    tr
+                        th No.
+                        th Image
+                        th Product
+                        th Price
+                        th Quantity
+                        th Total
+                        th Action
+                tbody
+                    each product, index in products
+                        tr
+                            td #{index + 1}
+                            td
+                                img.cart-product-image(src=product.images alt=product.title)
+                            td
+                                a.cart-product-link(href=`/product/detail/${product.slug}`)= product.title
+                            td $#{product.price}
+                            td
+                                input.cart-quantity-input(
+                                    type="number"
+                                    name="quantity"
+                                    value=product.quantity
+                                    min="1"
+                                    max=product.stock
+                                    product-id=product.id
+                                )
+                            td.fw-bold $#{product.totalPrice}
+                            td
+                                a.cart-delete-btn(href=`/cart/delete/${product.id}`) Delete
+
+        .cart-summary
+            .cart-total
+                span.cart-total-label Total Amount:
+                span.cart-total-amount $#{totalPrice}
+            .text-end
+                a.cart-payment-btn(href="/checkout") Proceed to Payment
 
 block script
+    script(src="/client/js/alert.js")

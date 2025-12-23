@@ -12,7 +12,6 @@ module.exports.cartId = async (req, res, next) => {
         const cart = await Cart.findById(req.cookies.cartId)
         cart.totalQuantity = cart.products.reduce((sum,item) => sum + item.quantity, 0)
         res.locals.cart = cart
-        console.log(cart)
     }
     next()
 }
