@@ -1,7 +1,9 @@
 extends ../../layouts/default.pug
+include ../../../utils/alert.pug
 block style
     link(href="/client/css/product.css" rel="stylesheet")
 block main
+    +alert-success("3000")
     .product-detail
         .product-grid
             .product-image

@@ -1,3 +1,4 @@
+include ../../utils/search.pug
 header.header
     .container
         .row.align-items-center
@@ -8,10 +9,14 @@ header.header
             .col-9
                 .inner-menu
                     ul
-                        li
+                        if show_search
+                            li
+                                +search(last_search_word)
+                        li.home-page
                             a(href="/") Home Page
                         li
                             a(href="/product") Products
                         li
                             a(href="/cart")
                                 i.fa-solid.fa-basket-shopping.fa-lg
+                                span (#{cart ?cart.totalQuantity : 0})

@@ -1,5 +1,6 @@
 const Product = require("../../models/product_model.js")
 const Category = require("../../models/category_model.js")
+const searchHelper = require("../../helpers/search.js")
 // [GET] /product
 module.exports.index = async (req, res) => {
     let query = {
@@ -21,13 +22,20 @@ module.exports.index = async (req, res) => {
             }
         })
     }
+    // Filter by search keyword:
+    const last_search_word = searchHelper(req)
+    if(last_search_word){
+        query.title = {$regex: last_search_word, $options: "i"}
+    }
     const render_product = await Product.find(query)
                                         .sort({position: "desc"}) // sort the product by position to display (display newest first)
     const categories = await Category.find({deleted: false})
     res.render("client/pages/products/index.pug", {
         titlePage: "Product Page",
         products: render_product,
-        categories: categories
+        categories: categories,
+        last_search_word: last_search_word,
+        show_search: true
     })
 }
 

@@ -22,7 +22,7 @@ const categorySchema = new Schema({
 }, {
     timestamps: true // This enables automatic timestamps
 })
-// define product model
+// define category model
 const Category = mongoose.model("categories", categorySchema, "categories")
 // third argument is to prevent automatic prularized the collection name
 

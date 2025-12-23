@@ -18,7 +18,7 @@ const accountSchema = new Schema({
 }, {
     timestamps: true // This enables automatic timestamps
 })
-// define product model
+// define account model
 const Account = mongoose.model("accounts", accountSchema, "accounts")
 // third argument is to prevent automatic prularized the collection name
 

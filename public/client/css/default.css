@@ -2,6 +2,29 @@ body{
     background-color: #fcfbfb;
     overflow-x: hidden;
 }
+/* Alert */
+[show-alert]{
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    z-index: 9999
+}
+[show-alert].alert-hidden{
+    animation-name: alert-hidden;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+@keyframes alert-hidden{
+    from{
+        right: 15px
+    }
+    to{
+        right: -100%;
+        display: none;
+    }
+}
+/* End alert */
+
 /* Header */
 
 .header{
@@ -48,6 +71,102 @@ body{
     width: 100%;
 }
 
+/* li.home-page{
+    margin-left: 160px;
+} */
+/* Search Form Styling */
+#form-search {
+    width: 100%;
+    max-width: 380px;
+}
+
+#form-search .input-group {
+    display: flex;
+    gap: 8px;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 50px;
+    padding: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#form-search .input-group:focus-within {
+    border-color: #6366f1;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+#form-search .form-control {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    font-size: 15px;
+    background: transparent;
+    color: #1e293b;
+    border-radius: 50px;
+}
+
+#form-search .form-control::placeholder {
+    color: #94a3b8;
+}
+
+#form-search .btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+#form-search .btn-success {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+}
+
+#form-search .btn-success:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+#form-search .btn-secondary {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+#form-search .btn-secondary:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+/* Header Menu Spacing */
+.inner-menu ul {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end;
+}
+
+.inner-menu ul li:has(#form-search) {
+    flex: 1;
+}
+
+.inner-menu ul li a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.inner-menu ul li a:hover {
+    color: #6366f1;
+}
 /* End Header */
 
 /* Footer */

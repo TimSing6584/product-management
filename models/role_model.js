@@ -20,7 +20,7 @@ const roleSchema = new Schema({
 }, {
     timestamps: true // This enables automatic timestamps
 })
-// define product model
+// define role model
 const Role = mongoose.model("roles", roleSchema, "roles")
 // third argument is to prevent automatic prularized the collection name
 
