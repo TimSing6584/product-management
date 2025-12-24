@@ -1,0 +1,87 @@
+include ../../../utils/alert.pug
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Login / Sign Up
+        link(href="/client/css/auth.css" rel="stylesheet")
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous")
+    body
+        +alert-success("3000")
+        +alert-error("3000")
+        .auth-container
+            .auth-card
+                .auth-header
+                    h1.auth-logo Readify
+                    p.auth-tagline Every book starts a journey
+
+                .auth-tabs
+                    button.tab-btn.active(data-tab="login") Login
+                    button.tab-btn(data-tab="register") Sign Up
+
+                //- Login Form
+                .tab-content.active#login
+                    form(action="/auth/login" method="POST")
+                        .form-group
+                            label(for="login-email") Email
+                            input.form-input(
+                                type="email"
+                                id="login-email"
+                                name="email"
+                                placeholder="Enter your email"
+                                required
+                            )
+
+                        .form-group
+                            label(for="login-password") Password
+                            input.form-input(
+                                type="password"
+                                id="login-password"
+                                name="password"
+                                placeholder="Enter your password"
+                                required
+                            )
+
+                        button.auth-submit(type="submit") LOGIN
+
+                //- Register Form
+                .tab-content#register
+                    form(action="/auth/register" method="POST")
+                        .form-group
+                            label(for="register-fullname") Full Name
+                            input.form-input(
+                                type="text"
+                                id="register-fullname"
+                                name="fullname"
+                                placeholder="Enter your full name"
+                                required
+                            )
+
+                        .form-group
+                            label(for="register-email") Email
+                            input.form-input(
+                                type="email"
+                                id="register-email"
+                                name="email"
+                                placeholder="Enter your email"
+                                required
+                            )
+
+                        .form-group
+                            label(for="register-password") Password
+                            input.form-input(
+                                type="password"
+                                id="register-password"
+                                name="password"
+                                placeholder="Create a password"
+                                required
+                            )
+
+                        button.auth-submit(type="submit") CREATE ACCOUNT
+
+                .auth-footer
+                    a.back-link(href="/") ← Back to Home
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous")
+        script(src="/client/js/auth.js")
+        script(src="/utils/alert.js")

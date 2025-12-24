@@ -20,3 +20,14 @@ header.header
                             a(href="/cart")
                                 i.fa-solid.fa-basket-shopping.fa-lg
                                 span (#{cart ? cart.totalQuantity : 0})
+                        li
+                            if user != null
+                                a(
+                                    href="/auth/logout"
+                                    class="btn btn-danger btn-sm header-logout"
+                                ) Log Out
+                            else
+                                a(
+                                    href="/auth"
+                                    class="btn btn-primary btn-sm header-login"
+                                ) Log In
