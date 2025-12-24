@@ -6,8 +6,8 @@ module.exports.index = async (req, res) => {
     let totalPrice = 0
     for(let obj of res.locals.cart.products){
         let product = await Product.findById(obj.product_id).lean()
-        product.price = (((100 - product.discountPercentage) * product.price) / 100).toFixed(0)
-        product.totalPrice = product.price * obj.quantity
+        product.priceNew = (((100 - product.discountPercentage) * product.price) / 100).toFixed(0)
+        product.totalPrice = product.priceNew * obj.quantity
         product.quantity = obj.quantity
         totalPrice += product.totalPrice
 
@@ -74,6 +74,6 @@ module.exports.update = async (req, res) => {
             }
         }
     )
-
+    req.flash("success", "You have successfully updated quantity")
     res.redirect(req.get("referrer"))
 }

@@ -30,7 +30,7 @@ block main
                                 img.cart-product-image(src=product.images alt=product.title)
                             td
                                 a.cart-product-link(href=`/product/detail/${product.slug}`)= product.title
-                            td $#{product.price}
+                            td $#{product.priceNew}
                             td
                                 input.cart-quantity-input(
                                     type="number"

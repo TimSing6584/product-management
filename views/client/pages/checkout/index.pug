@@ -1,0 +1,86 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+block style
+    link(href="/client/css/checkout.css" rel="stylesheet")
+block main
+    .container.my-3
+        .row
+            .col-12
+                +box-head("Check Out")
+
+        .checkout-table-wrapper
+            table.table
+                thead
+                    tr
+                        th No.
+                        th Image
+                        th Product
+                        th Price
+                        th Quantity
+                        th Total
+                tbody
+                    each product, index in products
+                        tr
+                            td #{index + 1}
+                            td
+                                img.checkout-product-image(src=product.images alt=product.title)
+                            td
+                                a.checkout-product-link(href=`/product/detail/${product.slug}`)= product.title
+                            td $#{product.priceNew}
+                            td.fw-bold ×#{product.quantity}
+                            td.fw-bold $#{product.totalPrice}
+
+        if products.length > 0
+            .checkout-summary
+                .checkout-total
+                    span.checkout-total-label Total Amount:
+                    span.checkout-total-amount $#{totalPrice}
+
+            .row
+                .col-lg-8.offset-lg-2
+                    .card.checkout-form-card
+                        h4 📋 Shipping Information
+                        form(
+                            action="/checkout/order"
+                            method="POST"
+                        )
+                            .form-group
+                                label(for="fullname") Full Name
+                                input.form-control(
+                                    type="text"
+                                    id="fullname"
+                                    name="fullname"
+                                    placeholder="Enter your full name"
+                                    required
+                                )
+                            .form-group
+                                label(for="phone") Phone Number
+                                input.form-control(
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="Enter your phone number"
+                                    required
+                                )
+                            .form-group
+                                label(for="address") Delivery Address
+                                input.form-control(
+                                    type="text"
+                                    id="address"
+                                    name="address"
+                                    placeholder="Enter your complete address"
+                                    required
+                                )
+                            button.checkout-order-btn(type="submit") Complete Order
+
+                            .checkout-security
+                                i.fa-solid.fa-lock
+                                span Secure checkout powered by Readify
+        else
+            .checkout-empty
+                .checkout-empty-icon 🛒
+                p.checkout-empty-text Your cart is empty
+                a.btn.btn-primary(href="/product") Continue Shopping
+
+block script
+    script(src="https://kit.fontawesome.com/15f24667ff.js" crossorigin="anonymous")
