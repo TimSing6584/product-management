@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Choose Login Type
+        link(href="/client/css/auth.css" rel="stylesheet")
+    body
+        .preview-container
+            .preview-card
+                .preview-header
+                    h1.preview-logo Readify
+                    p.preview-tagline Choose how you want to continue
+
+                .preview-options
+                    a.option-card.user-card(href="/auth")
+                        .option-icon
+                        h3.option-title User Login
+                        p.option-description Browse and shop for your favorite books
+                        .option-arrow →
+
+                    a.option-card.staff-card(href="/admin")
+                        .option-icon
+                        h3.option-title Staff Login
+                        p.option-description Manage products and orders
+                        .option-arrow →
+
+                .preview-footer
+                    a.back-link(href="/") ← Back to Home

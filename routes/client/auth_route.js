@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const auth_validator = require("../../validation/client/auth.js")
 const controller = require("../../controllers/client/auth_controller.js")
+router.get("/preview", controller.preview)
 router.get("/", controller.index)
 router.post(
     "/register",

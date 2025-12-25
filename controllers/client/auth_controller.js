@@ -1,6 +1,10 @@
 const User = require("../../models/user_model.js")
 const md5 = require('md5')
 const jwt = require('jsonwebtoken')
+// [GET] /auth/preview
+module.exports.preview = async (req,res) => {
+    res.render("client/pages/auth/preview.pug")
+}
 // [GET] /auth
 module.exports.index = async (req,res) => {
     try{

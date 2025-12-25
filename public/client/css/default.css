@@ -57,6 +57,11 @@ main {
     justify-content: flex-end;
     gap: 50px;
 }
+.header .inner-menu ul li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 .header .inner-menu a {
     text-decoration: none;
     color: #333;
@@ -74,7 +79,11 @@ main {
     background-color: #007bff;
     transition: width 0.3s;
 }
-
+.header .inner-menu a[href="/my_account"]::after,
+.header .inner-menu a[href="/auth/logout"]::after
+{
+    background-color: transparent;
+}
 .header .inner-menu a:hover {
     color: #007bff;
 }
@@ -178,6 +187,79 @@ main {
 
 .inner-menu ul li a:hover {
     color: #6366f1;
+}
+
+/* Header Login/Logout Buttons */
+.header-login,
+.header-logout {
+    padding: 8px 20px !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    display: inline-block;
+    border: none !important;
+}
+
+.header-login {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.header-login:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4) !important;
+    color: white !important;
+}
+
+.header-logout {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.header-logout:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+    color: white !important;
+}
+/* Account Link with Avatar */
+.header .inner-menu a[href="/my_account"] {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-right: 12px;
+}
+
+.header .inner-menu a[href="/my_account"] i {
+    display: flex;
+    align-items: center;
+}
+
+.header .inner-menu a[href="/my_account"] img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #6366f1;
+    transition: all 0.3s ease;
+}
+
+.header .inner-menu a[href="/my_account"]:hover img {
+    border-color: #8b5cf6;
+    transform: scale(1.1);
+}
+
+.header .inner-menu a[href="/my_account"] .fa-circle-user {
+    color: #6366f1;
+    transition: all 0.3s ease;
+}
+
+.header .inner-menu a[href="/my_account"]:hover .fa-circle-user {
+    color: #8b5cf6;
+    transform: scale(1.1);
 }
 /* End Header */
 

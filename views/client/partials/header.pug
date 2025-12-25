@@ -22,12 +22,18 @@ header.header
                                 span (#{cart ? cart.totalQuantity : 0})
                         li
                             if user != null
+                                a(href="/my_account")
+                                    if user.avatar
+                                        i
+                                            img(src=account.avatar account-avatar)
+                                    else
+                                        i(class="fa-solid fa-circle-user fa-xl")
                                 a(
                                     href="/auth/logout"
                                     class="btn btn-danger btn-sm header-logout"
                                 ) Log Out
                             else
                                 a(
-                                    href="/auth"
+                                    href="/auth/preview"
                                     class="btn btn-primary btn-sm header-login"
                                 ) Log In
