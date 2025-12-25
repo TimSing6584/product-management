@@ -14,5 +14,6 @@ router.patch(
     modify_account_validator,
     controller.edit
 )
-
+router.get("/history", controller.history_get)
+router.get("/history/detail/:id", controller.history_detail)
 module.exports = router

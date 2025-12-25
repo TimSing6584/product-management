@@ -1,0 +1,37 @@
+extends ../../layouts/default.pug
+block style
+    link(href="/client/css/history.css" rel="stylesheet")
+block main
+    .detail-wrapper
+        .detail-back
+            a(href="/my_account/history") Back to Orders
+
+        .detail-header
+            h1 Order Details
+            p Review your order items and pricing
+
+        .detail-table-wrapper
+            table
+                thead
+                    tr
+                        th No.
+                        th Image
+                        th Product
+                        th Price
+                        th Qty
+                        th Total
+                tbody
+                    each product, index in products
+                        tr
+                            td #{index + 1}
+                            td
+                                img(
+                                    src=product.images
+                                    alt=product.title
+                                )
+                            td= product.title
+                            td $#{product.priceNew}
+                            td ×#{product.quantity}
+                            td $#{product.totalPrice}
+
+block script

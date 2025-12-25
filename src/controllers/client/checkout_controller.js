@@ -15,11 +15,13 @@ module.exports.index = async (req,res) => {
 module.exports.order = async (req,res) => {
     const userInfo = req.body
     const cartInfo = await cart_info_helper(res.locals.cart.products)
+    const userId = res.locals.user ? res.locals.user._id : ""
     const order = new Order({
         cartId: req.cookies.cartId,
         userInfo: userInfo,
         products: cartInfo.products,
-        totalPrice: cartInfo.totalPrice
+        totalPrice: cartInfo.totalPrice,
+        userId: userId
     })
     await order.save()
     // Decrement stock and Increment sold of each product

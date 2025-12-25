@@ -1,0 +1,42 @@
+extends ../../layouts/default.pug
+block style
+    link(href="/client/css/history.css" rel="stylesheet")
+block main
+    .history-container
+        .history-header
+            h1 Order History
+            p Track all your previous orders and purchases
+        if orders && orders.length > 0
+            .table-wrapper
+                table.history-table
+                    thead
+                        tr
+                            th No.
+                            th Image
+                            th Title
+                            th Date
+                            th Total
+                            th Action
+                    tbody
+                        each order, index in orders
+                            tr
+                                td #{index + 1}
+                                td
+                                    img(
+                                        src=(order.products)[0].images
+                                        alt=(order.products)[0].title
+                                    )
+                                td #{(order.products)[0].title}#{order.products.length > 1 ? ' ...' : ''}
+                                td
+                                    p= new Date(order.createdAt).toLocaleDateString("en-SG", {timeZone: "Asia/Singapore"})
+                                td $#{order.totalPrice}
+                                td
+                                    button.btn.btn-secondary(onclick=`location.href='/my_account/history/detail/${order._id}'`) View Details
+        else
+            .empty-history
+                .empty-icon
+                h2.empty-title No Orders Yet
+                p.empty-text Start shopping to see your order history here
+                a.btn(href="/product") Browse Products
+
+block script

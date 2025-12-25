@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const { Schema } = mongoose;
 const orderSchema = new Schema({
+    userId: String,
     cartId: String,
     userInfo: {
         fullname: String,
@@ -10,6 +11,11 @@ const orderSchema = new Schema({
     products: {
         type: Array,
         default: []
+    },
+    status: {
+        type: String,
+        enum: ["pending", "confirmed", "delivered"],
+        default: "pending"
     },
     totalPrice: Number,
     deleted: {
