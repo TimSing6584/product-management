@@ -30,7 +30,7 @@ module.exports.index = async (req, res) => {
     }
     // Pagination
     const total_products = await Product.countDocuments(query)
-    let pagination = paginationHelper(req, 10, total_products) // limit item per page is 4
+    let pagination = paginationHelper(req, 12, total_products) // limit item per page is 12
     const render_product = await Product.find(query)
                                         .limit(pagination.limitItems)
                                         .skip((pagination.currentPage - 1) * pagination.limitItems)

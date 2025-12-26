@@ -28,13 +28,16 @@ block main
                 each item, index in accounts
                     tr
                         td #{index + 1}
-                        td
-                            img(
-                                src=item.avatar
-                                avatar-account
-                                width= item.avatar? "100px" : "0px"
-                                height= item.avatar? "100px" : "0px"
-                            )
+                        if item.avatar
+                            td
+                                img(
+                                    src=item.avatar
+                                    avatar-account
+                                    width= item.avatar? "100px" : "0px"
+                                    height= item.avatar? "100px" : "0px"
+                                )
+                        else
+                            td Nil
                         td #{item.fullname}
                         td #{item.role.name}
                         td #{item.email}

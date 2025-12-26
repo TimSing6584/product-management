@@ -5,12 +5,15 @@ const cartSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "accounts"
     },
-    products: [
-        {
+    products: {
+        type: [
+            {
             product_id: String,
             quantity: Number
-        }
-    ]
+            }
+        ],
+        default: []
+    }
 }, {
     timestamps: true // This enables automatic timestamps
 })
