@@ -21,7 +21,9 @@ const client_route = require("./src/routes/client/index_route.js")
 const admin_route = require("./src/routes/admin/index_route.js")
 const port = process.env.PORT
 // import database
-const database = require("./src/config/database.js")
+const dbConnect  = require("./src/config/database.js")
+// Connect to database
+dbConnect().catch(err => console.log("Database connection failed:", err))
 // embed static files
 app.use(express.static(`${__dirname}/src/public`))
 // set up the template engine
@@ -32,9 +34,6 @@ app.set("view engine", "pug")
 app.use(cookie_parser('ILoveNTU123@'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
-
-// Connect to database
-database.connect()
 
 // Routes:
 client_route(app)
