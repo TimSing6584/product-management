@@ -3,7 +3,8 @@
 🔗 Live demo: https://readifya.vercel.app/  
 ⚠️ Best viewed on **desktop / laptop**. This project focuses on **back-end architecture and logic**, so responsive UI is not a priority.
 
-⚠️ **Cold Start Notice:** The live demo is deployed on a free MongoDB tier. The first request after inactivity may take 10-15 seconds to load. This is expected behavior for serverless deployments with free-tier databases. Subsequent requests will be significantly faster due to connection caching.
+⚠️ **Cold Start Notice**: The live demo is deployed on a free MongoDB tier. The first request after inactivity may take 10-15 seconds to load. This is expected behavior for serverless deployments with free-tier databases. Subsequent requests will be significantly faster due to connection caching.
+
 ---
 
 ## Overview
