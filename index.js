@@ -34,7 +34,9 @@ app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 
 // Connect to database
-database.connect()
+database.connect().catch(err => {
+    console.error("Initial DB connection failed:", err);
+})
 
 // Routes:
 client_route(app)
