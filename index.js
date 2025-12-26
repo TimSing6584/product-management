@@ -23,7 +23,7 @@ const port = process.env.PORT
 // import database
 const dbConnect  = require("./src/config/database.js")
 // Connect to database
-dbConnect().catch(err => console.log("Database connection failed:", err))
+// dbConnect().catch(err => console.log("Database connection failed:", err))
 // embed static files
 app.use(express.static(`${__dirname}/src/public`))
 // set up the template engine
@@ -36,7 +36,18 @@ app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
 
 // Routes:
-client_route(app)
-admin_route(app)
 
-app.listen(port)
+(async () => {
+    try {
+        await dbConnect()
+        console.log("Database connected")
+        client_route(app)
+        admin_route(app)
+        app.listen(port, () => {
+            console.log(`Server running on port ${port}`)
+        })
+    } catch (err) {
+        console.error("Failed to start server:", err)
+        process.exit(1)
+    }
+})()
