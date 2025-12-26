@@ -8,7 +8,7 @@ const cart_middleware = require("../../middleware/client/cart_middleware.js")
 const attach_user_middleware = require("../../middleware/client/attach_user_middleware.js")
 const auth_middleware = require("../../middleware/client/auth_middleware.js")
 module.exports = (app) => {
-    // app.use(cart_middleware.cartId)
+    app.use(cart_middleware.cartId)
     app.use(attach_user_middleware.attachUser)
 
     app.use("/", homeRoutes)
