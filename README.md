@@ -1,6 +1,7 @@
 # Readify 📚
 
 🔗 Live demo: https://readifya.vercel.app/  
+
 ⚠️ Best viewed on **desktop / laptop**. This project focuses on **back-end architecture and logic**, so responsive UI is not a priority.
 
 ⚠️ **Cold Start Notice**: The live demo is deployed on a free MongoDB tier. The first request after inactivity may take 10-15 seconds to load. This is expected behavior for serverless deployments with free-tier databases. Subsequent requests will be significantly faster due to connection caching.
@@ -11,8 +12,12 @@
 
 **Readify** is an **SSR (Server-Side Rendering) online bookstore** built with a clear **MVC-style structure**, featuring both **client-facing pages** and a **admin system for management**.
 
-The project includes a **role-based access control (RBAC)** mechanism for the admin side, where different admin roles are granted different permissions.  
+The project includes a **dynamic role-based access control (RBAC)** mechanism for the admin side, where different admin roles are granted different permissions by the administrator. 
 
+<img width="956" height="337" alt="image" src="https://github.com/user-attachments/assets/de49b9d9-062d-4666-94cb-8b4f6dd96a98" />
+
+
+<img width="940" height="429" alt="image" src="https://github.com/user-attachments/assets/aebfc083-0942-43e5-ac0d-91c2d5992ef2" />
 
 ---
 
