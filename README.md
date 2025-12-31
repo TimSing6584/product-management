@@ -14,6 +14,11 @@
 
 **Readify** is an **SSR (Server-Side Rendering) online bookstore** built with a clear **MVC-style structure**, featuring both **client-facing pages** and a **admin system for management**.
 
+<img width="947" height="434" alt="image" src="https://github.com/user-attachments/assets/d830e962-208f-49de-843b-7e62548a919e" />
+
+<img width="947" height="439" alt="image" src="https://github.com/user-attachments/assets/885d6475-ee12-453f-a155-b776e897615f" />
+
+
 The project includes a **dynamic role-based access control (RBAC)** mechanism for the admin side, where different admin roles are granted different permissions by the administrator. 
 
 <img width="956" height="337" alt="image" src="https://github.com/user-attachments/assets/de49b9d9-062d-4666-94cb-8b4f6dd96a98" />
